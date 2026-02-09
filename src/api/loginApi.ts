@@ -1,0 +1,92 @@
+import type { LoginInfo } from "../context/LoginContext";
+
+export async function getLogin() {
+        const url = `${API_URL}/api/verify_login`;
+
+        const response = await fetch(url, {
+                method: "GET",
+                headers: {
+                        'Content-Type': 'application/json',
+                },
+                credentials: "include" as RequestCredentials
+        });
+        if (response.ok) {
+                const loginInfo: LoginInfo | false = await response.json();
+
+                // const loginInfo = await response.json();
+                return loginInfo;
+        }
+        if (response.status === 401) {
+                // throw new Error("Invalid credentials");
+                throw new Error(` ${response.statusText}`);
+        }
+        // throw new Error(`Error connecting to ${process.env.REACT_APP_API_SERVER_URL}: ${response.statusText}`);
+        throw new Error(` ${response.statusText}`);
+}
+
+export async function deleteLogin() {
+        const url = `${API_URL}/api/logout`;
+        const response = await fetch(url, {
+                method: "DELETE",
+                credentials: "include"
+        })
+        if (response.ok) {
+                return;
+        }
+        throw new Error(`Error logging out, status: ${response.status}`);
+}
+
+export async function postLogin(input: string, password: string) {
+        const url = `${API_URL}/api/login`;
+
+        const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                        "Content-Type": "application/json"
+                },
+                credentials: "include" as RequestCredentials,
+                body: JSON.stringify({ name, password })
+        });
+        console.log(response)
+        if (response.ok) {
+                const loginInfo: LoginInfo = await response.json();
+                //     const loginInfo = await response.json();
+                return loginInfo;
+        }
+
+        if (response.status === 401) {
+                throw new Error("Invalid credentials");
+        }
+
+        throw new Error(`${response.statusText}`);
+}
+
+export async function signUp(email: string, password: string, userName: string) {
+        // const url = `http://localhost:3002/api/signup`;
+        const url = `${API_URL}/api/signup`;
+
+        const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                        "Content-Type": "application/json"
+                },
+                credentials: "include" as RequestCredentials,
+                body: JSON.stringify({
+                        email: email,
+                        password: password,
+                        userName: userName,
+                })
+        });
+
+        if (response.ok) {
+                const loginInfo: LoginInfo = await response.json();
+                //     const loginInfo = await response.json();
+                return loginInfo;
+        }
+
+        if (response.status === 401) {
+                throw new Error("Invalid credentials");
+        }
+
+        throw new Error(`${response.statusText}`);
+}
