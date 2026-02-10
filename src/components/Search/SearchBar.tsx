@@ -1,5 +1,5 @@
-import React from 'react'
 import styles from "./SearchBar.module.css"
+import { LucideSearch } from 'lucide-react'
 
 const SearchBar = () => {
     return (
@@ -8,7 +8,7 @@ const SearchBar = () => {
                 placeholder='Search collection...'
             />
             <button>
-                S
+                <LucideSearch />
             </button>
         </div>
 

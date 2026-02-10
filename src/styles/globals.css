@@ -3,7 +3,6 @@
 @tailwind utilities;
 /* Dein globales CSS */
 
-
 button {
     border-radius: var(--border-radius);
     border: 1px solid transparent;

@@ -1,26 +1,34 @@
 import { Link } from 'react-router';
 import styles from "./NavBar.module.css";
 import SearchBar from '../Search/SearchBar';
+import { LucidePlus } from 'lucide-react';
 // import { auth, signIn, signOut } from '@/auth'
 // import Image from 'next/image'
 // import Link from 'next/link'
 // import React from 'react'
 
 //component async weil server component
-const Navbar =  () => {
+const Navbar = () => {
     // const session = await auth();
 
     return (
         <header className={styles.header}>
             <nav className={styles.nav}>
                 <Link to="/">
-                    <img src="/logo.png" alt='logo'/>
+                    <img src="/logo.png" alt='logo' />
                 </Link>
-                <SearchBar/>
+                <SearchBar />
+                <div>
+                    <Link to="/">
+                        <LucidePlus />
+                        Erstellen
+                    </Link>
                     <Link to={"/"}>
                         <p>anmelden</p>
                     </Link>
-                    {/* {session && session?.user ? (
+                </div>
+
+                {/* {session && session?.user ? (
                         <>
                             <Link href="/startup/create">
                                 <span>Create</span>

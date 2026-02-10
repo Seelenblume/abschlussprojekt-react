@@ -8,11 +8,10 @@
 
 :root{
     font-size: 16px;
-    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     /* default-browser font-size, 
     choose any size in px, em or rem */
     line-height: 1.5;
-    font: inherit;
     /* form elements, strong, em, ... */
     scroll-behavior: smooth;
     /* no jumping for links */
