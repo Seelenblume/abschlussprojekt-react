@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router"
 import type { CardCollection } from "../../models/card"
 import styles from "./CollectionCompact.module.css"
 
@@ -5,9 +6,14 @@ interface Props {
   collection: CardCollection,
 }
 
+
 const CollectionCompact = ({ collection }: Props) => {
+  
+  const navigate = useNavigate();
+
   return (
-    <div className={styles.compact}>
+    // TODO: Link oder navigate besser?
+    <div className={styles.compact} onClick={() => navigate(`/collection/${collection.id}`)}>
       <div className={styles.header}>
         <p>{collection.title}</p>
         <p>{collection.cards.length}</p>

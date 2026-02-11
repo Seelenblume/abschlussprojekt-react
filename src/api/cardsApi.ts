@@ -23,15 +23,16 @@ export async function getCollectionsBySearch(search: string) {
     return testCardCollections
 }
 
-// async function getCardCollectionById(collectionId: string) {
+export async function getCardCollectionById(collectionId: string) {
 
-//      const response = await fetch(`${process.env.API_SERVER_URL}/api/collection/${collectionId}`, {
-//             method: "GET",
-//             credentials: "include" as RequestCredentials
-//         });
-//         const loadedData: CardCollection = await response.json();
-//         return loadedData;
-// }
+    //  const response = await fetch(`${process.env.API_SERVER_URL}/api/collection/${collectionId}`, {
+    //         method: "GET",
+    //         credentials: "include" as RequestCredentials
+    //     });
+    //     const loadedData: CardCollection = await response.json();
+    //     return loadedData;
+        return testCardCollections[0]
+}
 
 // async function postCardCollection(
 //     title: string,

@@ -23,7 +23,7 @@ const Navbar = () => {
                         <LucidePlus />
                         Erstellen
                     </Link>
-                    <Link to={"/"}>
+                    <Link to={"/sign-up"}>
                         <p>Anmelden</p>
                     </Link>
                 </div>
