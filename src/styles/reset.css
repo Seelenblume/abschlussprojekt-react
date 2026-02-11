@@ -28,6 +28,9 @@
     --accent-color: hsl(196, 100%, 96%);
     --accent-red: red;
     --success-color: green;
+
+    --width: 80rem;
+
 }
 
 html {

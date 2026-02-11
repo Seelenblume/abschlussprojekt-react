@@ -1,12 +1,18 @@
+import CollectionGrid from "../../components/Collection/CollectionGrid"
+import { testCardCollections } from "../../lib/testdata"
 import styles from "./Home.module.css"
-import PopularCollectionsArea from '../../components/Home/PopularCollections/PopularCollectionsArea'
 
 const Home = () => {
   return (
     <div className={styles.home}>
       <h1>Lerne Karten wie ein CHUD</h1>
       <h2>Mit unserer Baka lern app</h2>
-      <PopularCollectionsArea />
+
+      <div className={styles.popular}>
+        <h3>Popular Collections</h3>
+        <CollectionGrid collections={testCardCollections} />
+      </div>
+
     </div>
   )
 }

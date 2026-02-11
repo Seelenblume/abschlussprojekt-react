@@ -18,13 +18,13 @@ const Navbar = () => {
                     <img src="/logo.png" alt='logo' />
                 </Link>
                 <SearchBar />
-                <div>
-                    <Link to="/">
+                <div className={styles.links}>
+                    <Link to="/" className={styles.create}>
                         <LucidePlus />
                         Erstellen
                     </Link>
                     <Link to={"/"}>
-                        <p>anmelden</p>
+                        <p>Anmelden</p>
                     </Link>
                 </div>
 

@@ -1,19 +1,27 @@
+import type { CardCollection } from "../../models/card"
 import styles from "./CollectionCompact.module.css"
 
-const CollectionCompact = () => {
+interface Props {
+  collection: CardCollection,
+}
+
+const CollectionCompact = ({ collection }: Props) => {
   return (
     <div className={styles.compact}>
       <div className={styles.header}>
-        <p>Title</p>
-        <p>Size</p>
+        <p>{collection.title}</p>
+        <p>{collection.cards.length}</p>
       </div>
-      <p className={styles.desc}>Description Text</p>
+      <p className={styles.desc}>{collection.description}</p>
       <div className={styles.footer}>
-        <p>Username</p>
+        <p>von {collection.user.name}</p>
         <div className={styles.tags}>
-          <p>Tag</p>
-          <p>Tag</p>
-          <p>Tag</p>
+          {collection.categories.map((category) =>
+            <div>
+              <p>{category.name}</p>
+              {category.subCategory && <p>{category.subCategory.name}</p>}
+            </div>
+          )}
         </div>
       </div>
 
