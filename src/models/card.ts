@@ -1,8 +1,9 @@
 import type { Category } from "./category"
+import type { User } from "./user"
 
 export type CardCollection = {
     id: string,
-    userId: string,
+    user: User,
     title: string,
     description: string,
     cards: Card[],
