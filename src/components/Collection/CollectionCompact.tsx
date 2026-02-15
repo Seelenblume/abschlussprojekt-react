@@ -23,9 +23,8 @@ const CollectionCompact = ({ collection }: Props) => {
         <p>von {collection.user.name}</p>
         <div className={styles.tags}>
           {collection.categories.map((category) =>
-            <div>
+            <div key={category.name}>
               <p>{category.name}</p>
-              {category.subCategory && <p>{category.subCategory.name}</p>}
             </div>
           )}
         </div>

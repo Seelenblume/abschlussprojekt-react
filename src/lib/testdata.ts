@@ -9,27 +9,12 @@ export const testCardCollections: CardCollection[] = [
         categories: [
             {
                 name: "Typen",
-                subCategory: {
-                    name: "Primitive Typen",
-                    subCategory: {
-                        name: "string | number | boolean"
-                    }
-                }
             },
             {
                 name: "Typen",
-                subCategory: {
-                    name: "Komplexe Typen",
-                    subCategory: {
-                        name: "Union & Intersection"
-                    }
-                }
             },
             {
                 name: "Generics",
-                subCategory: {
-                    name: "Generic Functions"
-                }
             }
         ],
         cards: [
@@ -55,21 +40,9 @@ export const testCardCollections: CardCollection[] = [
         categories: [
             {
                 name: "Biologie",
-                subCategory: {
-                    name: "Zellbiologie",
-                    subCategory: {
-                        name: "Mitochondrien"
-                    }
-                }
             },
             {
-                name: "Biologie",
-                subCategory: {
-                    name: "Genetik",
-                    subCategory: {
-                        name: "DNA & RNA"
-                    }
-                }
+                name: "Zellbiologie",
             }
         ],
         cards: [

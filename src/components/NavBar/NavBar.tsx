@@ -19,7 +19,7 @@ const Navbar = () => {
                 </Link>
                 <SearchBar />
                 <div className={styles.links}>
-                    <Link to="/" className={styles.create}>
+                    <Link to="/collection/create" className={styles.create}>
                         <LucidePlus />
                         Erstellen
                     </Link>

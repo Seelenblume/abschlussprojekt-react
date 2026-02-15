@@ -31,27 +31,28 @@ export async function getCardCollectionById(collectionId: string) {
     //     });
     //     const loadedData: CardCollection = await response.json();
     //     return loadedData;
-        return testCardCollections[0]
+        return testCardCollections[1]
 }
 
-// async function postCardCollection(
-//     title: string,
-//     description: string,
-//     categories: Category[],
-// ) {
-//      const response = await fetch(`${process.env.API_SERVER_URL}/api/collection/`, {
-//             method: "POST",
-//                 headers: {
-//                         "Content-Type": "application/json"
-//                 },
-//                 credentials: "include" as RequestCredentials,
-//                 body: JSON.stringify({title, description })
-//         });
+export async function postCardCollection(
+    title: string,
+    description: string,
+    categories: Category[],
+) {
+    //  const response = await fetch(`${process.env.API_SERVER_URL}/api/collection/`, {
+    //         method: "POST",
+    //             headers: {
+    //                     "Content-Type": "application/json"
+    //             },
+    //             credentials: "include" as RequestCredentials,
+    //             body: JSON.stringify({title, description })
+    //     });
         
-//         if(!response.ok) {
-//             throw new Error(response.status.toLocaleString())
-//         }
-// }
+    //     if(!response.ok) {
+    //         throw new Error(response.status.toLocaleString())
+    //     }
+    return `/user/collection/1234`
+}
 
 // async function postCard(
 //     collectionId: string,

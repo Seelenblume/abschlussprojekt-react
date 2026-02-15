@@ -12,7 +12,9 @@ const CollectionGrid = ({ collections }: Props) => {
     return (
         <div className={styles.grid}>
             {collections.map((collection) =>
-                <CollectionCompact collection={collection} />
+                <div key={collection.id}>
+                    <CollectionCompact collection={collection} />
+                </div>
             )}
         </div>
     )

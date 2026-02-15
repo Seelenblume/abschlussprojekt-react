@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
+import styles from "./Authform.module.css"
 
 interface Props {
     type: string,
@@ -7,20 +8,21 @@ interface Props {
 
 const AuthForm = ({ type }: Props) => {
     return (
-        <div>
+        <div className={styles.auth}>
             <form>
                 {type === "sign-in"
                     ? (
-                        <div>
+                        <>^
+                            {/* make custom input with label */}
                             <input placeholder='user name or email' />
                             <input placeholder='password' />
-                        </div>)
+                        </>)
                     : (
-                        <div>
+                        <>
                             <input placeholder='user name' />
                             <input placeholder='user name' />
                             <input placeholder='password' />
-                        </div>
+                        </>
                     )
                 }
             </form>

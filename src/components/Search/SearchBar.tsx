@@ -8,7 +8,7 @@ const SearchBar = () => {
 
   const navigate = useNavigate();
 
-    function handleChange(event :React.ChangeEvent<HTMLInputElement>) {
+    function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         event.preventDefault();
         setSearchData(event.target.value);
     }
@@ -23,6 +23,7 @@ const SearchBar = () => {
         <div >
             <form onSubmit={onSubmit} className={styles.searchbar}>
                  <input
+                 type="search"
                 placeholder='Search collection...'
                 onChange={handleChange}
                 value={searchData}

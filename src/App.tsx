@@ -7,6 +7,7 @@ import Collections from './pages/Collections/Collections'
 import Collection from './pages/Collection/Collection'
 import SignIn from './pages/Auth/SignIn'
 import SignUp from './pages/Auth/SignUp'
+import CreateCollection from './pages/CreateCollection/CreateCollection'
 
 function App() {
 
@@ -18,8 +19,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/user/:userId" element={<UserProfile />} />
+            <Route path="/user/collection/collectionId" element={<UserProfile />} />
             <Route path="/collections" element={<Collections />} />
             <Route path="/collection/:collectionId" element={<Collection />} />
+            <Route path="/collection/create" element={<CreateCollection />} />
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/sign-up" element={<SignUp />} />
           </Routes>

@@ -6,11 +6,11 @@ export type CardCollection = {
     user: User,
     title: string,
     description: string,
-    cards: Card[],
+    cards: CardModel[],
     categories: Category[],
 }
 
-export type Card = {
+export type CardModel = {
     id: string,
     front: string,
     back: string,
