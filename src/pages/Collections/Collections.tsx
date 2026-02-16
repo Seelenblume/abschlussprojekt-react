@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router';
 import type { CardCollection } from '../../models/card';
 import { getCollectionsBySearch } from '../../api/cardsApi';
 import CollectionCompact from '../../components/Collection/CollectionCompact';
-import { testCardCollections } from '../../lib/testdata';
+import { testCardCollections } from '../../test/testdata';
 import styles from "./Collections.module.css"
 import CollectionGrid from '../../components/Collection/CollectionGrid';
 

@@ -1,16 +1,7 @@
-import { testCardCollections } from "../lib/testdata";
+import { testCardCollections } from "../test/testdata";
 import type { CardCollection } from "../models/card";
 import type { Category } from "../models/category";
 
-// async function getAllUserCardCollections(userId: string) {
-
-//      const response = await fetch(`${process.env.API_SERVER_URL}/api/collection/user/${userId}`, {
-//             method: "GET",
-//             credentials: "include" as RequestCredentials
-//         });
-//         const loadedData: CardCollection = await response.json();
-//         return loadedData;
-// }
 export async function getCollectionsBySearch(search: string) {
 
     //  const response = await fetch(`${process.env.API_SERVER_URL}/api/collection/user/${userId}`, {
@@ -32,6 +23,17 @@ export async function getCardCollectionById(collectionId: string) {
     //     const loadedData: CardCollection = await response.json();
     //     return loadedData;
         return testCardCollections[1]
+}
+
+export async function getUserCardCollectionByUserId(userId: string) {
+
+    //  const response = await fetch(`${process.env.API_SERVER_URL}/api/collection/${collectionId}`, {
+    //         method: "GET",
+    //         credentials: "include" as RequestCredentials
+    //     });
+    //     const loadedData: CardCollection = await response.json();
+    //     return loadedData;
+        return testCardCollections
 }
 
 export async function postCardCollection(

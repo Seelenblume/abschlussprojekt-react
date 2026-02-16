@@ -19,7 +19,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/user/:userId" element={<UserProfile />} />
-            <Route path="/user/collection/collectionId" element={<UserProfile />} />
+            <Route path="/user/:userId/collection/:collectionId" element={<UserProfile />} />
             <Route path="/collections" element={<Collections />} />
             <Route path="/collection/:collectionId" element={<Collection />} />
             <Route path="/collection/create" element={<CreateCollection />} />

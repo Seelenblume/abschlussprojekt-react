@@ -1,12 +1,12 @@
 .compact {
-    width: 20rem;
+    width: 25rem;
+    height: 10rem;
     padding: 1rem;
     border: 2px solid var(--secondary-color);
     border-radius: var(--border-radius);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 0.5rem;
     
     &:hover {
         cursor: pointer;

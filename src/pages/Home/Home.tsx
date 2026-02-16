@@ -1,5 +1,5 @@
 import CollectionGrid from "../../components/Collection/CollectionGrid"
-import { testCardCollections } from "../../lib/testdata"
+import { testCardCollections } from "../../test/testdata"
 import styles from "./Home.module.css"
 
 const Home = () => {
