@@ -16,10 +16,15 @@ const Card = ({ card }: Props) => {
       <div className={clsx(styles.inner,
           showBack && styles.flip
         )}>
-        <p className={styles.front}>{card.front}</p>
-        <p className={styles.back}>{card.back}</p>
+        <div className={styles.front}><p>{card.front}</p></div>
+        <div className={styles.back}><p>{card.back}</p></div>
       </div>
 
+        
+      <div>
+        <p>Notes</p>
+        <p>{card.notes}</p>
+      </div>
     </div>
   )
 }

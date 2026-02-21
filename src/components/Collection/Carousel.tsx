@@ -3,7 +3,6 @@ import { LucideChevronLeft, LucideChevronRight } from 'lucide-react';
 import type { CardCollection } from '../../models/card';
 import Card from "../Card/Card"
 import styles from "./Carousel.module.css"
-import clsx from 'clsx';
 
 interface Props {
     collection: CardCollection,

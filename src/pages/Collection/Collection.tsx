@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router"
 import type { CardCollection } from "../../models/card";
 import { getCardCollectionById } from "../../api/cardsApi";
-import CardModel from "../../components/Card/Card";
-import { LucideChevronLeft, LucideChevronRight } from "lucide-react";
 import style from "./Collection.module.css"
 import Carousel from "../../components/Collection/Carousel";
+import CategoryTag from "../../components/Categories/CategoryTag";
 
 const Collection = () => {
 
@@ -46,11 +45,12 @@ const Collection = () => {
            <div>
             {collection.categories.map((category) =>
             <div>
-              <p>{category.name}</p>
+              <CategoryTag categoryName={category.name}/>
             </div>
           )}
            </div>
          <Carousel collection={collection} />
+         
         </div>
     )
 }

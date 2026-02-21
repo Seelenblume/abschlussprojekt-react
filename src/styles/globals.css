@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* Dein globales CSS */
 
 button {
     border-radius: var(--border-radius);
