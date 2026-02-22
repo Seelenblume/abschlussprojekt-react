@@ -1,14 +1,29 @@
+.backdrop {
+    background: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+}
+
 .addCard {
-    border: 1px solid var(--secondary-color);
-    border-radius: var(--border-radius);
+    position: fixed;
     display: flex;
     flex-direction: column;
     justify-content: start;
-    text-align: start;
+    text-align: left;
+    border: 1px solid var(--secondary-color);
+    border-radius: var(--border-radius);
     gap: 2rem;
-    width: 80%;
-    margin: auto;
+    width: 50%;
     padding: 2rem;
+    background: white;
+    z-index: 10;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .header {
@@ -29,16 +44,16 @@
     width: 40%;
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: center;
     text-align: start;
 
     input {
         width: 100%;
         margin-top: 0.25rem;
     }
+
+    margin-bottom: 2rem;
 }
-
-
 
 textarea {
     width: 100%;

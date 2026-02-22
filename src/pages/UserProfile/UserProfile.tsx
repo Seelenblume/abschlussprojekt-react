@@ -6,6 +6,8 @@ import type { CardCollection } from '../../models/card';
 import { getCardCollectionById, getUserCardCollectionByUserId } from '../../api/cardsApi';
 import CollectionGrid from '../../components/Collection/CollectionGrid';
 import styles from "./UserProfile.module.css"
+import { useLoginContext } from '../../context/LoginContext';
+import LoggedInUserprofile from './LoggedInUserprofile';
 
 const UserProfile = () => {
   const params = useParams();
@@ -15,6 +17,7 @@ const UserProfile = () => {
   const [collections, setCollections] = useState<CardCollection[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const {loginInfo, setLoginInfo} = useLoginContext();
 
   useEffect(() => {
     async function load() {
@@ -56,12 +59,11 @@ const UserProfile = () => {
   }
 
   return (
-    <div className={styles.profile}>
+    <>
+    {loginInfo && loginInfo.userId === user.id ?  
+    <LoggedInUserprofile collections={collections}/> : <div className={styles.profile}>
 
       <div className={styles.banner}>
-        <div className={styles.bannerImage}>
-          <img src="../src/assets/wife.png"/>
-        </div>
         <div className={styles.gradient} />
         <div className={styles.info}>
           <img src="../src/assets/react.svg" className={styles.profilePic} />
@@ -74,7 +76,10 @@ const UserProfile = () => {
         {collections.length !== 0 ? <CollectionGrid collections={collections} /> : <p>Dieser User hat keine Sammlungen</p>}
       </div>
 
-    </div>
+    </div>}
+     
+    </>
+   
   )
 }
 

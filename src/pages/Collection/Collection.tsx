@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router"
+import { Link, useParams } from "react-router"
 import type { CardCollection } from "../../models/card";
-import { getCardCollectionById } from "../../api/cardsApi";
+import { getCardCollectionById, postCard } from "../../api/cardsApi";
 import style from "./Collection.module.css"
 import Carousel from "../../components/Collection/Carousel";
 import CategoryTag from "../../components/Categories/CategoryTag";
+import { useLoginContext } from "../../context/LoginContext";
+import AddCardPage from "../AddCard/AddCardPage";
 
 const Collection = () => {
 
@@ -13,6 +15,13 @@ const Collection = () => {
 
     const [collection, setCollection] = useState<CardCollection | null>(null);
     const [loading, setLoading] = useState(true);
+
+    const [showModal, setShowModal] = useState(false)
+
+    const { loginInfo, setLoginInfo } = useLoginContext();
+
+
+    //irgendwie muss ich noch einen rerender triggern nachdem die kart hinzugefügt wurde
 
     useEffect(() => {
         async function load() {
@@ -35,22 +44,42 @@ const Collection = () => {
     }
 
     if (!collection) {
-        return
+        return;
+    }
+
+    async function handleAddCard(front: string, back: string, notes: string) {
+        try {
+            if (collection) {
+                await postCard(collection.id, front, back, notes);
+                console.log("handle", front)
+            } else {
+                throw Error("")
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
 
     return (
         <div className={style.collection}>
+            {showModal && <AddCardPage onModalClose={() => setShowModal(false)}
+                onAddCard={(front, back, notes) => handleAddCard(front, back, notes)} />}
             <h1>{collection.title}</h1>
-           <div>
-            {collection.categories.map((category) =>
+            {loginInfo && (loginInfo.userId == collection.user.id) &&
+                <div>
+                    <button onClick={() => setShowModal(true)}>Karte Hinzufügen</button>
+                </div>
+            }
             <div>
-              <CategoryTag categoryName={category.name}/>
+                {collection.categories.map((category) =>
+                    <div>
+                        <CategoryTag categoryName={category.name} />
+                    </div>
+                )}
             </div>
-          )}
-           </div>
-         <Carousel collection={collection} />
-         
+            <Carousel collection={collection} />
+
         </div>
     )
 }

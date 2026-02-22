@@ -1,7 +1,4 @@
 .whole {
-    width: var(--width);
-    margin: 2rem auto;
-
     form {
         display: flex;
         flex-direction: column;

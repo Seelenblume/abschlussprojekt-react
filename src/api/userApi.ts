@@ -8,5 +8,5 @@ export async function getUserById(id: string) {
     //     });
     //     const loadedData: User = await response.json();
     //     return loadedData;
-    return {name: "username", id: "13246"}
+    return {name: "kiko", id: "000000"}
 }
