@@ -36,6 +36,17 @@ export async function getUserCardCollectionByUserId(userId: string) {
         return testCardCollections
 }
 
+export async function getSavedCollectionsByUserId(userId: string) {
+
+    //  const response = await fetch(`${process.env.API_SERVER_URL}/api/collection/${collectionId}`, {
+    //         method: "GET",
+    //         credentials: "include" as RequestCredentials
+    //     });
+    //     const loadedData: CardCollection = await response.json();
+    //     return loadedData;
+        return [testCardCollections[0], testCardCollections[1]]
+}
+
 export async function postCardCollection(
     title: string,
     description: string,
@@ -64,6 +75,26 @@ export async function postCard(
 ) {
     //  const response = await fetch(`${process.env.API_SERVER_URL}/api/card/`, {
     //         method: "POST",
+    //             headers: {
+    //                     "Content-Type": "application/json"
+    //             },
+    //             credentials: "include" as RequestCredentials,
+    //             body: JSON.stringify({collectionId, front, back, notes})
+    //     });
+        
+    //     if(!response.ok) {
+    //         throw new Error(response.status.toLocaleString())
+    //     }
+}
+
+export async function updateCard(
+    cardId: string,
+    front?: string,
+    back?: string,
+    notes?: string,
+) {
+    //  const response = await fetch(`${process.env.API_SERVER_URL}/api/card/`, {
+    //         method: "PUT",
     //             headers: {
     //                     "Content-Type": "application/json"
     //             },

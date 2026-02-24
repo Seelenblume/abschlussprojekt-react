@@ -12,7 +12,7 @@ import { LoginContext } from './context/LoginContext'
 import { useEffect, useState } from 'react'
 import type { LoginInfo } from './models/loginInfo'
 import { getLogin } from './api/loginApi'
-import AddCardPage from './pages/AddCard/AddCardPage'
+import AllCards from './pages/AllCards/AllCards'
 
 function App() {
 
@@ -50,6 +50,7 @@ function App() {
               <Route path="/user/:userId/collection/:collectionId" element={<UserProfile />} />
               <Route path="/collections" element={<Collections />} />
               <Route path="/collection/:collectionId" element={<Collection />} />
+              <Route path="/collection/:collectionId/cards" element={<AllCards />} />
               <Route path="/collection/create" element={<CreateCollection />} />
               <Route path="/sign-in" element={<SignIn />} />
               <Route path="/sign-up" element={<SignUp />} />

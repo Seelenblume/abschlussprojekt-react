@@ -7,6 +7,14 @@
   perspective: 1000px;
 }
 
+.cardSmall {
+  width: 20rem;
+  height: 10rem;
+  cursor: pointer;
+  perspective: 1000px;
+  font-size: smaller;
+}
+
 .inner {
   position: relative;
   width: 100%;

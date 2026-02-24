@@ -8,6 +8,7 @@ import CollectionGrid from '../../components/Collection/CollectionGrid';
 import styles from "./UserProfile.module.css"
 import { useLoginContext } from '../../context/LoginContext';
 import LoggedInUserprofile from './LoggedInUserprofile';
+import ProfileBanner from '../../components/Profile/ProfileBanner';
 
 const UserProfile = () => {
   const params = useParams();
@@ -61,16 +62,9 @@ const UserProfile = () => {
   return (
     <>
     {loginInfo && loginInfo.userId === user.id ?  
-    <LoggedInUserprofile collections={collections}/> : <div className={styles.profile}>
+    <LoggedInUserprofile collections={collections} user={user}/> : <div className={styles.profile}>
 
-      <div className={styles.banner}>
-        <div className={styles.gradient} />
-        <div className={styles.info}>
-          <img src="../src/assets/react.svg" className={styles.profilePic} />
-          <h1>{user.name}</h1>
-        </div>
-
-      </div>
+      <ProfileBanner username={user.name}/>
       <div className={styles.collections}>
         <h2>Sammlungen</h2>
         {collections.length !== 0 ? <CollectionGrid collections={collections} /> : <p>Dieser User hat keine Sammlungen</p>}

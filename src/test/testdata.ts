@@ -3,7 +3,7 @@ import type { CardCollection } from "../models/card";
 export const testCardCollections: CardCollection[] = [
     {
         id: "col-001",
-        user: {id: "user-123", name: "kiko"},
+        user: {id: "0000", name: "kiko"},
         title: "TypeScript Deep Dive",
         description: "Fortgeschrittene TypeScript Konzepte",
         categories: [
@@ -34,7 +34,7 @@ export const testCardCollections: CardCollection[] = [
     },
     {
         id: "col-002",
-        user: {id: "user-123", name: "DENJI"},
+        user: {id: "0000", name: "DENJI"},
         title: "Biologie Grundlagen",
         description: "Grundlagen der Biologie mit Kategorien",
         categories: [

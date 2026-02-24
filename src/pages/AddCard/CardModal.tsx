@@ -1,4 +1,4 @@
-import styles from "./AddCard.module.css"
+import styles from "./CardModal.module.css"
 import { LucideX } from "lucide-react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
@@ -8,9 +8,10 @@ type Inputs = {
     notes: string,
 }
 
-export default function AddCardPage({ onModalClose, onAddCard }: {
+export default function CardModal({ onModalClose, onAddCard, update }: {
     onModalClose: () => void,
-    onAddCard: (front: string, back: string, notes: string) => Promise<void>
+    onAddCard: (front: string, back: string, notes: string) => Promise<void>,
+    update?: boolean
 }) {
 
     const {
@@ -33,7 +34,7 @@ export default function AddCardPage({ onModalClose, onAddCard }: {
             <div className={styles.addCard}>
                 <div className={styles.header}>
 
-                    <h3>Karte Hinzufügen</h3>
+                    <h3>Karte {update ? <span>Aktualisieren</span> : <span>Hinzufügen</span>}</h3>
                     <button onClick={onModalClose}>
                         <LucideX />
                     </button>
@@ -45,7 +46,7 @@ export default function AddCardPage({ onModalClose, onAddCard }: {
 
                             <label>Front</label>
                             <input {...register("front", {
-                                required: "This field is required",
+                                required: !update ? "This field is required" : false,
                             })} />
                             {errors.front && <span>{errors.front.message}</span>}
                         </div>
@@ -54,7 +55,7 @@ export default function AddCardPage({ onModalClose, onAddCard }: {
 
                             <label>Back</label>
                             <input {...register("back", {
-                                required: "This field is required",
+                                required: !update ? "This field is required" : false,
                             })} />
                             {errors.back && <span>{errors.back.message}</span>}
 

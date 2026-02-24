@@ -18,7 +18,7 @@ export async function getLogin() {
         //         throw new Error(` ${response.statusText}`);
         // }
         // throw new Error(` ${response.statusText}`);
-        return {userId: "000000", email: "kiko@gmail.com", userName: "kiko"}
+        return{userId: "0000", userName: "kiko", email: ""}
 }
 
 export async function deleteLogin() {
