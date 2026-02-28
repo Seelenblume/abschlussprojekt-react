@@ -1,4 +1,48 @@
-/* .collection {
-    width: var(--width);
-    margin: 2rem auto;
-} */
+.collection {
+    position: relative;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu {
+    width: 15rem;
+    background-color: lightgray;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid gray;
+    position: absolute;
+    right: 1rem;
+    z-index: 5;
+
+    div {
+        display: flex;
+        gap: 0.5rem;
+        cursor: pointer;
+        padding: 1rem;
+        border-bottom: 1px solid black;
+        &:last-of-type {
+            border: none;
+        }
+        &:hover {
+            background-color: gray;
+        }
+    }
+}
+
+.categories {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.profile {
+    img {
+    border-radius: 100%;
+    width: 6rem;
+    height: 6rem;
+    border: 2px solid black
+}
+}

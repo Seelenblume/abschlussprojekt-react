@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router"
 import type { CardCollection } from "../../models/card";
 import { getCardCollectionById, postCard } from "../../api/cardsApi";
@@ -7,22 +7,35 @@ import Carousel from "../../components/Collection/Carousel";
 import CategoryTag from "../../components/Categories/CategoryTag";
 import { useLoginContext } from "../../context/LoginContext";
 import CardModal from "../AddCard/CardModal";
+import { LucideEllipsisVertical, LucideLibrary, LucideLibraryBig, LucidePlus } from "lucide-react";
 
 const Collection = () => {
 
     const params = useParams()
     const collectionId = params.collectionId;
 
+    const menu = useRef<HTMLDivElement | null>(null);
+
     const [collection, setCollection] = useState<CardCollection | null>(null);
     const [loading, setLoading] = useState(true);
 
     const [showModal, setShowModal] = useState(false)
+    const [showMenu, setShowMenu] = useState(false)
 
     const { loginInfo, setLoginInfo } = useLoginContext();
 
     const navigate = useNavigate()
 
     //irgendwie muss ich noch einen rerender triggern nachdem die kart hinzugefügt wurde
+
+    useEffect(() => {
+        document.addEventListener("mousedown", handleOutsideClick)
+
+        return () => {
+            document.removeEventListener("mousedown", handleOutsideClick)
+        }
+    }, [showMenu])
+
 
     useEffect(() => {
         async function load() {
@@ -39,6 +52,7 @@ const Collection = () => {
         }
         load()
     }, [collectionId])
+
 
     if (loading) {
         return <p>Loading...</p>
@@ -61,19 +75,37 @@ const Collection = () => {
         }
     }
 
+    function handleOutsideClick(event: MouseEvent) {
+        event.preventDefault()
+        if (showMenu && menu.current && !menu.current.contains(event.target as Node)) {
+            setShowMenu(false)
+        }
+    }
+
 
     return (
         <div className={style.collection}>
             {showModal && <CardModal onModalClose={() => setShowModal(false)}
                 onAddCard={(front, back, notes) => handleAddCard(front, back, notes)} />}
-            <h1>{collection.title}</h1>
-            {loginInfo && (loginInfo.userId == collection.user.id) &&
-                <div>
-                    <button onClick={() => setShowModal(true)}>Karte Hinzufügen</button>
-                    <button onClick={() => navigate(`/collection/${collectionId}/cards`)}>Alle Karten ansehen</button>
-                </div>
-            }
-            <div>
+            <div className={style.header}>
+                <h1>{collection.title}</h1>
+                {loginInfo && (loginInfo.userId == collection.user.id) &&
+                    <div>
+                        <button onClick={() => setShowMenu(!showMenu)}>
+                            <LucideEllipsisVertical />
+                        </button>
+                        {showMenu && <div className={style.menu} ref={menu}>
+                            <div onClick={() => {
+                                setShowModal(true)
+                                setShowMenu(false)
+                            }}><LucidePlus /><p>Karte hinzufügen</p></div>
+                            <div onClick={() => navigate(`/collection/${collectionId}/cards`)}><LucideLibraryBig /><p>Alle Karten ansehen</p></div>
+                        </div>}
+                    </div>
+                }
+            </div>
+
+            <div className={style.categories}>
                 {collection.categories.map((category) =>
                     <div>
                         <CategoryTag categoryName={category.name} />
@@ -81,7 +113,10 @@ const Collection = () => {
                 )}
             </div>
             <Carousel collection={collection} />
-
+            <div className={style.profile}>
+                <img src="../src/assets/react.svg"/>
+                <p>{collection.user.name}</p>
+            </div>
         </div>
     )
 }

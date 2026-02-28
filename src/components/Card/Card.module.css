@@ -53,3 +53,10 @@
   color: black;
   transform: rotateX(180deg);
 }
+
+.notes {
+  border: 1px solid red;
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 1rem;
+}

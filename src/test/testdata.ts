@@ -29,6 +29,60 @@ export const testCardCollections: CardCollection[] = [
                 front: "Warum sind Generics wichtig?",
                 back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
                 notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
             }
         ]
     },
@@ -56,6 +110,48 @@ export const testCardCollections: CardCollection[] = [
                 id: "card-004",
                 front: "Wofür steht DNA?",
                 back: "Desoxyribonukleinsäure",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
                 notes: ""
             }
         ]

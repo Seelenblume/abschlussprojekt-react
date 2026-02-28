@@ -22,8 +22,7 @@ const Card = ({ card, small }: Props) => {
       </div>
 
         
-      <div>
-        <p>Notes</p>
+      <div className={styles.notes}>
         <p>{card.notes}</p>
       </div>
     </div>

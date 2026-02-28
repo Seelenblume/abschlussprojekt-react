@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {useParams } from 'react-router'
+import { useParams } from 'react-router'
 import type { CardCollection } from '../../models/card'
 import { getCardCollectionById, updateCard } from '../../api/cardsApi'
 import Card from '../../components/Card/Card'
@@ -29,7 +29,7 @@ const AllCards = () => {
         load();
     }, [collectionId])
 
-    if(!collection) {
+    if (!collection) {
         return
     }
 
@@ -41,19 +41,22 @@ const AllCards = () => {
         }
     }
 
-  return (
-    <div>
+    return (
         <div>
-            {collection.cards.map((card) =>
-                <div className={styles.card}>
-                    {showModal && <CardModal update onModalClose={() => setShowModal(false)} onAddCard={(front, back, notes) => handleUpdateCard(card.id, front, back, notes)}/>} 
-                    <Card card={card} small/>
-                    <button onClick={() => setShowModal(true)}>Edit Card</button>
-                </div>
-            )}
+            {/* sieht sehr komisch aus, soll ich ein anderes Card Element benutzen? */}
+            <div className={styles.cardsList}>
+                {collection.cards.map((card) =>
+                    <>
+                        {showModal && <CardModal update onModalClose={() => setShowModal(false)} onAddCard={(front, back, notes) => handleUpdateCard(card.id, front, back, notes)} />}
+                        <div className={styles.card}>
+                            <Card card={card} small />
+                            <button onClick={() => setShowModal(true)}>Edit Card</button>
+                        </div>
+                    </>
+                )}
+            </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default AllCards

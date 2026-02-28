@@ -2,6 +2,6 @@
     background-color: lightgray;
     width: fit-content;
     padding: 0.25rem;
-    border-radius: var(--border-radius);
+    border-radius: 0.25rem;
     font-size: small;
 }
