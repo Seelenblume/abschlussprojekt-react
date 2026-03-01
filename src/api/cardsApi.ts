@@ -106,3 +106,11 @@ export async function updateCard(
     //         throw new Error(response.status.toLocaleString())
     //     }
 }
+
+export async function postBookmark(userId: string, colelctionId: string) {
+
+}
+
+export async function deleteBookmark(userId: string, colelctionId: string) {
+
+}

@@ -1,11 +1,11 @@
 import React from 'react'
 import CollectionCompact from './CollectionCompact'
-import type { CardCollection } from '../../models/card'
+import type { CardCollection, CardCollectionShort } from '../../models/card'
 
 import styles from "./CollectionGrid.module.css"
 
 interface Props {
-    collections: CardCollection[],
+    collections: CardCollectionShort[],
 }
 
 const CollectionGrid = ({ collections }: Props) => {

@@ -24,10 +24,11 @@
     --border-radius: 0.5rem;
 
     --primary-color: white;
-    --secondary-color: rgb(123, 179, 169);
-    --accent-color: hsl(196, 100%, 96%);
-    --accent-red: red;
-    --success-color: green;
+    --secondary-color: #2f7560;
+    --accent-color: #93C2BB;
+    --accent-red: #de5d3a;
+    --success-color: #449F1E;
+    --body-background: #F7F7F7;
 
     --width: 80rem;
 

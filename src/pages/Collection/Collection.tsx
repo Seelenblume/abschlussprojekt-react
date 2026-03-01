@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router"
 import type { CardCollection } from "../../models/card";
-import { getCardCollectionById, postCard } from "../../api/cardsApi";
+import { deleteBookmark, getCardCollectionById, postBookmark, postCard } from "../../api/cardsApi";
 import style from "./Collection.module.css"
 import Carousel from "../../components/Collection/Carousel";
 import CategoryTag from "../../components/Categories/CategoryTag";
 import { useLoginContext } from "../../context/LoginContext";
 import CardModal from "../AddCard/CardModal";
-import { LucideEllipsisVertical, LucideLibrary, LucideLibraryBig, LucidePlus } from "lucide-react";
+import { LucideBookmark, LucideEllipsisVertical, LucideLibraryBig, LucidePlus } from "lucide-react";
 
 const Collection = () => {
 
@@ -21,6 +21,8 @@ const Collection = () => {
 
     const [showModal, setShowModal] = useState(false)
     const [showMenu, setShowMenu] = useState(false)
+
+    const [bookmark, setBookmark] = useState(false)
 
     const { loginInfo, setLoginInfo } = useLoginContext();
 
@@ -43,6 +45,7 @@ const Collection = () => {
                 try {
                     const result = await getCardCollectionById(collectionId);
                     setCollection(result);
+
                 } catch (error) {
                     console.log(error)
                 } finally {
@@ -82,13 +85,32 @@ const Collection = () => {
         }
     }
 
+    async function handleBookmark() {
+        try {
+            if (collection) {
+                if (bookmark) {
+                    await deleteBookmark(collection.user.id, collection.id)
+                    setBookmark(false)
+                } else {
+                    await postBookmark(collection.user.id, collection.id)
+                    setBookmark(true)
+
+                }
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <div className={style.collection}>
             {showModal && <CardModal onModalClose={() => setShowModal(false)}
                 onAddCard={(front, back, notes) => handleAddCard(front, back, notes)} />}
             <div className={style.header}>
-                <h1>{collection.title}</h1>
+                <div>
+                    <h1>{collection.title}</h1>
+                    <span onClick={handleBookmark}>{bookmark ? <LucideBookmark /> : <LucideBookmark fill="black" />}</span>
+                </div>
                 {loginInfo && (loginInfo.userId == collection.user.id) &&
                     <div>
                         <button onClick={() => setShowMenu(!showMenu)}>
@@ -108,14 +130,14 @@ const Collection = () => {
             <div className={style.categories}>
                 {collection.categories.map((category) =>
                     <div>
-                        <CategoryTag categoryName={category.name} />
+                        <CategoryTag categoryName={category.value} />
                     </div>
                 )}
             </div>
             <Carousel collection={collection} />
             <div className={style.profile}>
-                <img src="../src/assets/react.svg"/>
-                <p>{collection.user.name}</p>
+                <img src="../src/assets/react.svg" />
+                <Link to={`/user/${collection.user.id}`}>{collection.user.name}</Link>
             </div>
         </div>
     )

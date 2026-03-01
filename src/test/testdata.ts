@@ -1,4 +1,5 @@
 import type { CardCollection } from "../models/card";
+import type { Category } from "../models/category";
 
 export const testCardCollections: CardCollection[] = [
     {
@@ -8,15 +9,19 @@ export const testCardCollections: CardCollection[] = [
         description: "Fortgeschrittene TypeScript Konzepte",
         categories: [
             {
-                name: "Typen",
+                label: "Typen",
+                value: "Typen",
             },
             {
-                name: "Typen",
+                label: "Typen",
+                value: "Typen",
             },
             {
-                name: "Generics",
+                label: "Typen",
+                value: "Typen",
             }
         ],
+        favorite: true,
         cards: [
             {
                 id: "card-001",
@@ -84,7 +89,8 @@ export const testCardCollections: CardCollection[] = [
                 back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
                 notes: ""
             }
-        ]
+        ],
+        cardCount: 12
     },
     {
         id: "col-002",
@@ -277,3 +283,38 @@ export const testCardCollections: CardCollection[] = [
         ]
     }
 ];
+
+export const testCategories: Category[] = [
+    {
+        label: "CATEGORY_LABEL",
+        value: "Category value"
+    },
+    {
+        label: "CATEGORY_LABEL",
+        value: "Category value"
+    },
+    {
+        label: "CATEGORY_LABEL",
+        value: "Category value"
+    },
+    {
+        label: "CATEGORY_LABEL",
+        value: "Category value"
+    },
+    {
+        label: "CATEGORY_LABEL",
+        value: "Category value"
+    },
+    {
+        label: "CATEGORY_LABEL",
+        value: "Category value"
+    },
+    {
+        label: "CATEGORY_LABEL",
+        value: "Category value"
+    },
+    {
+        label: "CATEGORY_LABEL",
+        value: "Category value"
+    },
+]

@@ -1,49 +1,66 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { postCardCollection } from '../../api/cardsApi'
-import { useNavigate } from 'react-router';
+import { data, useNavigate } from 'react-router';
 import styles from "./CreateCollection.module.css"
-import type { CardModel } from '../../models/card';
 import { LucidePlus } from 'lucide-react';
+import type { CardModel } from '../../models/card';
+import { Controller, useForm, type SubmitHandler } from 'react-hook-form';
+import type { Category } from '../../models/category';
+import Select from 'react-select';
+import { getAllCategories } from '../../api/categoryApi';
 
-
-const defaultData = {
-  name: ""
+type Inputs = {
+  title: string,
+  desc?: string,
+  cards: CardModel[],
+  categories: Category[]
 }
-
 
 const CreateCollection = () => {
 
   const navigate = useNavigate();
 
-  const [collectionData, setCollectionData] = useState({
-    title: "",
-    desc: "",
-    cards: [],
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>({
+    defaultValues: {
+      title: "",
+      desc: "",
+      cards: [],
+      categories: []
+    }
   })
 
-  const [categories, setCategories] = useState([{ ...defaultData }]);
 
-  // https://medium.com/@amitsharma_24072/handling-multiple-inputs-in-reactjs-best-practices-for-react-js-input-forms-9b973f4beb7e
-  function handleChange(event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) {
-    event.preventDefault()
-    const { name, value } = event.target;
-    setCollectionData((prev) => ({
-      ...prev,
-      [name]: value
-    })
-    )
-    console.log(collectionData);
-  }
 
-  async function onSubmit(event: React.FormEvent) {
-    event.preventDefault()
-    try {
-      const url = await postCardCollection(collectionData.title, collectionData.desc, [])
-      navigate(url,)
-    } catch (error) {
-      console.log(error);
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    async function load() {
+      try {
+        const cat = await getAllCategories()
+        setCategories(cat)
+      } catch (error) {
+        console.log(error)
+      }
     }
+    load()
+  }, [])
+
+  
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data)
+    // try {
+    //   const url = await postCardCollection(collectionData.title, collectionData.desc, [])
+    //   navigate(url,)
+    // } catch (error) {
+    //   console.log(error);
+    // }
   }
+
 
   function onCancel() {
     navigate(-1);
@@ -52,38 +69,47 @@ const CreateCollection = () => {
   return (
     <div className={styles.whole}>
       <h2>Create a Collection</h2>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.inputGroup}>
           <label htmlFor='title'>Title of your collection</label>
-          <input id='title' name='title' onChange={handleChange} className={styles.inputLocal} />
+          <input id='title' {...register("title", {
+            required: "This field is required",
+            maxLength: {
+              value: 20,
+              message: "Maximum of 20 characters"
+            }
+          })} placeholder='Enter Title...' className={styles.inputLocal} />
         </div>
         <div className={styles.inputGroup}>
           <label htmlFor='desc'>Description (max 200 chars)</label>
-          <textarea id='desc' name='desc' onChange={handleChange} className={styles.textarea} />
+          <textarea id='desc' {...register("desc", {
+            maxLength: {
+              value: 200,
+              message: "Maximum of 200 characters"
+            }
+          }) 
+          } className={styles.textarea} />
         </div>
 
-        <div>
-          <label htmlFor='category'>Add Categories</label>
-          <button type='button' onClick={() => {
-            if (categories.length < 5) {
-              setCategories([...categories, { ...defaultData }])
-              console.log(categories)
-            } else {
-              console.log("no more than 5 categories")
-            }
+        
 
-          }}><LucidePlus /></button>
-
-          {categories.map(() => <div>
-            <select>
-              <option value="volvo">Volvo</option>
-              <option value="saab">Saab</option>
-              <option value="mercedes">Mercedes</option>
-              <option value="audi">Audi</option>
-            </select>
-          </div>
-          )}
-
+        <div className={styles.inputGroup}>
+          <label htmlFor='category'>Categories</label>
+          <Controller
+            control={control}
+            name="categories"
+            render={({field}) => (
+              <Select
+              placeholder="Search for Categories..."
+              className={styles.select} 
+              isMulti
+              options={categories}
+              value={field.value}
+              onChange={(value) => field.onChange(value)}
+              id='category'
+              />
+            )}
+          />
         </div>
 
         <div className={styles.buttons}>
