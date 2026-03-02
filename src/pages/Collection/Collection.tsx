@@ -8,6 +8,7 @@ import CategoryTag from "../../components/Categories/CategoryTag";
 import { useLoginContext } from "../../context/LoginContext";
 import CardModal from "../AddCard/CardModal";
 import { LucideBookmark, LucideEllipsisVertical, LucideLibraryBig, LucidePlus } from "lucide-react";
+import { useToast } from "../../context/ToastContext";
 
 const Collection = () => {
 
@@ -23,6 +24,8 @@ const Collection = () => {
     const [showMenu, setShowMenu] = useState(false)
 
     const [bookmark, setBookmark] = useState(false)
+
+    const { addNotification } = useToast()
 
     const { loginInfo, setLoginInfo } = useLoginContext();
 
@@ -91,14 +94,28 @@ const Collection = () => {
                 if (bookmark) {
                     await deleteBookmark(collection.user.id, collection.id)
                     setBookmark(false)
+                    addNotification({
+                        id: "ioahf",
+                        type: "SUCCESS",
+                        message: "Bookmark removed!"
+                    })
                 } else {
                     await postBookmark(collection.user.id, collection.id)
                     setBookmark(true)
-
+                    addNotification({
+                        id: "ioahf",
+                        type: "SUCCESS",
+                        message: "Bookmarked!"
+                    })
                 }
             }
         } catch (error) {
             console.log(error)
+            addNotification({
+                id: "ioahf",
+                type: "ERROR",
+                message: "Something went wrong!"
+            })
         }
     }
 
@@ -107,7 +124,7 @@ const Collection = () => {
             {showModal && <CardModal onModalClose={() => setShowModal(false)}
                 onAddCard={(front, back, notes) => handleAddCard(front, back, notes)} />}
             <div className={style.header}>
-                <div>
+                <div className={style.title}>
                     <h1>{collection.title}</h1>
                     <span onClick={handleBookmark}>{bookmark ? <LucideBookmark /> : <LucideBookmark fill="black" />}</span>
                 </div>
@@ -135,10 +152,19 @@ const Collection = () => {
                 )}
             </div>
             <Carousel collection={collection} />
-            <div className={style.profile}>
-                <img src="../src/assets/react.svg" />
-                <Link to={`/user/${collection.user.id}`}>{collection.user.name}</Link>
+            <div className={style.info}>
+                <div className={style.desc}>
+                    {collection.description}
+                </div>
+                <div className={style.profile}>
+                    <h3>Creator</h3>
+                    <div className={style.name}>
+                        <img src="../src/assets/react.svg" />
+                        <Link to={`/user/${collection.user.id}`}>{collection.user.name}</Link>
+                    </div>
+                </div>
             </div>
+
         </div>
     )
 }

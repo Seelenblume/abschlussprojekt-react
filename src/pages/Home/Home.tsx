@@ -4,7 +4,7 @@ import styles from "./Home.module.css"
 
 const Home = () => {
   return (
-    <div>
+    <div className={styles.home}>
       <h1>Überschrift</h1>
       <h2>Überschrift</h2>
 

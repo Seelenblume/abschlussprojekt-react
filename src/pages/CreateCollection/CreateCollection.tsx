@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { postCardCollection } from '../../api/cardsApi'
-import { data, useNavigate } from 'react-router';
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router';
 import styles from "./CreateCollection.module.css"
-import { LucidePlus } from 'lucide-react';
 import type { CardModel } from '../../models/card';
 import { Controller, useForm, type SubmitHandler } from 'react-hook-form';
 import type { Category } from '../../models/category';
 import Select from 'react-select';
 import { getAllCategories } from '../../api/categoryApi';
+import { useToast } from '../../context/ToastContext';
 
 type Inputs = {
   title: string,
@@ -19,6 +18,7 @@ type Inputs = {
 const CreateCollection = () => {
 
   const navigate = useNavigate();
+  const { addNotification } = useToast()
 
   const {
     control,
@@ -45,14 +45,24 @@ const CreateCollection = () => {
         setCategories(cat)
       } catch (error) {
         console.log(error)
+        addNotification({
+          id: `${Date.now()}nwrpgvnbwr`,
+          message: "Something went wrong!",
+          type: "ERROR"
+        })
       }
     }
     load()
   }, [])
 
-  
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data)
+    addNotification({
+      id: `${Date.now()}nwrpgvnbwr`,
+      message: "Collection created!",
+      type: "SUCCESS"
+    })
     // try {
     //   const url = await postCardCollection(collectionData.title, collectionData.desc, [])
     //   navigate(url,)
@@ -79,34 +89,37 @@ const CreateCollection = () => {
               message: "Maximum of 20 characters"
             }
           })} placeholder='Enter Title...' className={styles.inputLocal} />
+          {errors.title && <p> {errors.title.message}</p>}
         </div>
         <div className={styles.inputGroup}>
-          <label htmlFor='desc'>Description (max 200 chars)</label>
+          <label htmlFor='desc'>Description</label>
           <textarea id='desc' {...register("desc", {
             maxLength: {
               value: 200,
               message: "Maximum of 200 characters"
             }
-          }) 
+          })
           } className={styles.textarea} />
+          {errors.desc && <p>errors.desc.message</p>}
+
         </div>
 
-        
+
 
         <div className={styles.inputGroup}>
           <label htmlFor='category'>Categories</label>
           <Controller
             control={control}
             name="categories"
-            render={({field}) => (
+            render={({ field }) => (
               <Select
-              placeholder="Search for Categories..."
-              className={styles.select} 
-              isMulti
-              options={categories}
-              value={field.value}
-              onChange={(value) => field.onChange(value)}
-              id='category'
+                placeholder="Search for Categories..."
+                className={styles.select}
+                isMulti
+                options={categories}
+                value={field.value}
+                onChange={(value) => field.onChange(value)}
+                id='category'
               />
             )}
           />

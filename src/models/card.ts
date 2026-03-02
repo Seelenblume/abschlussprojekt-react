@@ -23,3 +23,8 @@ export type CardModel = {
     back: string,
     notes: string
 }
+
+export const Color = {
+    RED: "red",
+    BLUE: "blue",
+} as const

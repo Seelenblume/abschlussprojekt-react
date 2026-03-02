@@ -13,6 +13,8 @@ import { useEffect, useState } from 'react'
 import type { LoginInfo } from './models/loginInfo'
 import { getLogin } from './api/loginApi'
 import AllCards from './pages/AllCards/AllCards'
+import { ToastProvider } from './context/ToastProvider'
+import ToastContainer from './components/Toast/ToastContainer'
 
 function App() {
 
@@ -42,21 +44,25 @@ function App() {
         loginInfo: loginInfo,
         setLoginInfo: setLoginInfo
       }}>
-        <BrowserRouter>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/user/:userId" element={<UserProfile />} />
-              <Route path="/user/:userId/collection/:collectionId" element={<UserProfile />} />
-              <Route path="/collections" element={<Collections />} />
-              <Route path="/collection/:collectionId" element={<Collection />} />
-              <Route path="/collection/:collectionId/cards" element={<AllCards />} />
-              <Route path="/collection/create" element={<CreateCollection />} />
-              <Route path="/sign-in" element={<SignIn />} />
-              <Route path="/sign-up" element={<SignUp />} />
-            </Routes>
-          </Layout>
-        </BrowserRouter>
+        <ToastProvider>
+          <ToastContainer />
+          <BrowserRouter>
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/user/:userId" element={<UserProfile />} />
+                <Route path="/user/:userId/collection/:collectionId" element={<UserProfile />} />
+                <Route path="/collections" element={<Collections />} />
+                <Route path="/collection/:collectionId" element={<Collection />} />
+                <Route path="/collection/:collectionId/cards" element={<AllCards />} />
+                <Route path="/collection/create" element={<CreateCollection />} />
+                <Route path="/sign-in" element={<SignIn />} />
+                <Route path="/sign-up" element={<SignUp />} />
+              </Routes>
+            </Layout>
+          </BrowserRouter>
+
+        </ToastProvider>
       </LoginContext.Provider>
     </>
   )

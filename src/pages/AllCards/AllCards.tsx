@@ -5,6 +5,7 @@ import { getCardCollectionById, updateCard } from '../../api/cardsApi'
 import Card from '../../components/Card/Card'
 import CardModal from '../AddCard/CardModal'
 import styles from "./AllCards.module.css"
+import CardSmall from '../../components/Card/CardSmall'
 
 const AllCards = () => {
 
@@ -49,7 +50,7 @@ const AllCards = () => {
                     <>
                         {showModal && <CardModal update onModalClose={() => setShowModal(false)} onAddCard={(front, back, notes) => handleUpdateCard(card.id, front, back, notes)} />}
                         <div className={styles.card}>
-                            <Card card={card} small />
+                            <CardSmall card={card} />
                             <button onClick={() => setShowModal(true)}>Edit Card</button>
                         </div>
                     </>
