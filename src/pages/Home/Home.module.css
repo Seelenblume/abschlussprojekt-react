@@ -4,10 +4,10 @@
     }
 }
 
- .popular {
-        display: flex;
-        flex-direction: column;
-        justify-content: start;
-        align-items: center;
-        gap: 2rem;
-    }
+.popular {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 2rem;
+}

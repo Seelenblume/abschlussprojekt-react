@@ -58,6 +58,35 @@ export async function deleteLogin() {
 //         throw new Error(`${response.statusText}`);
 // }
 
+export async function signIn(email: string, password: string,) {
+        // const url = `http://localhost:3002/api/signup`;
+        const url = `${process.env.API_SERVER_URL}/signup`;
+
+        const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                        "Content-Type": "application/json"
+                },
+                credentials: "include" as RequestCredentials,
+                body: JSON.stringify({
+                        email: email,
+                        password: password,
+                })
+        });
+
+        if (response.ok) {
+                const loginInfo: LoginInfo = await response.json();
+                //     const loginInfo = await response.json();
+                return loginInfo;
+        }
+
+        if (response.status === 401) {
+                throw new Error("Invalid credentials");
+        }
+
+        throw new Error(`${response.statusText}`);
+}
+
 export async function signUp(email: string, password: string, userName: string) {
         // const url = `http://localhost:3002/api/signup`;
         const url = `${process.env.API_SERVER_URL}/signup`;

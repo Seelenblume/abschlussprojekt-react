@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
-import type { CardCollection } from '../../models/card'
 import { getCardCollectionById, updateCard } from '../../api/cardsApi'
-import Card from '../../components/Card/Card'
 import CardModal from '../AddCard/CardModal'
 import styles from "./AllCards.module.css"
 import CardSmall from '../../components/Card/CardSmall'
+import type { CardCollection, CardModel } from '../../models/card'
 
 const AllCards = () => {
 
@@ -15,6 +14,7 @@ const AllCards = () => {
     const [collection, setCollection] = useState<CardCollection | null>(null)
 
     const [showModal, setShowModal] = useState(false);
+    const [selectedCard, setSelectedCard] = useState<CardModel | null>(null);
 
     useEffect(() => {
         async function load() {
@@ -44,14 +44,21 @@ const AllCards = () => {
 
     return (
         <div>
-            {/* sieht sehr komisch aus, soll ich ein anderes Card Element benutzen? */}
             <div className={styles.cardsList}>
+                {showModal && selectedCard &&
+                <CardModal 
+                update 
+                onModalClose={() => setShowModal(false)} 
+                onAddCard={(front, back, notes) => handleUpdateCard(selectedCard.id, front, back, notes)} />}
+
                 {collection.cards.map((card) =>
                     <>
-                        {showModal && <CardModal update onModalClose={() => setShowModal(false)} onAddCard={(front, back, notes) => handleUpdateCard(card.id, front, back, notes)} />}
                         <div className={styles.card}>
                             <CardSmall card={card} />
-                            <button onClick={() => setShowModal(true)}>Edit Card</button>
+                            <button onClick={() => {
+                                setSelectedCard(card)
+                                setShowModal(true)
+                                }}>Edit Card</button>
                         </div>
                     </>
                 )}
