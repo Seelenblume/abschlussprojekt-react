@@ -15,10 +15,13 @@ import { getLogin } from './api/loginApi'
 import AllCards from './pages/AllCards/AllCards'
 import { ToastProvider } from './context/ToastProvider'
 import ToastContainer from './components/Toast/ToastContainer'
+import { useToast } from './context/ToastContext'
 
 function App() {
 
   const [loginInfo, setLoginInfo] = useState<LoginInfo | false>(false);
+
+  const {addNotification} = useToast()
 
   useEffect(() => {
     async function load() {
@@ -29,10 +32,11 @@ function App() {
       } catch (err) {
         setLoginInfo(false);
         console.log(err)
-        // toast({
-        //     variant: 'destructive',
-        //     description: `Error with getLogin: ${String(err)}`
-        // })
+        addNotification({
+          id: "oavnda",
+            type: 'ERROR',
+            message: `Error with getLogin: ${String(err)}`
+        })
       }
     }
     load();
@@ -44,8 +48,6 @@ function App() {
         loginInfo: loginInfo,
         setLoginInfo: setLoginInfo
       }}>
-        <ToastProvider>
-          <ToastContainer />
           <BrowserRouter>
             <Layout>
               <Routes>
@@ -61,8 +63,6 @@ function App() {
               </Routes>
             </Layout>
           </BrowserRouter>
-
-        </ToastProvider>
       </LoginContext.Provider>
     </>
   )

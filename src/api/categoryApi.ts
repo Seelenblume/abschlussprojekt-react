@@ -1,9 +1,12 @@
 import type { Category } from "../models/category";
 import { testCategories } from "../test/testdata";
 
+
+const apiUrl = import.meta.env.VITE_API_URL
+
 async function getCategoryById(categoryId: string) {
 
-     const response = await fetch(`${process.env.API_SERVER_URL}/api/category/${categoryId}`, {
+     const response = await fetch(`${apiUrl}/api/category/${categoryId}`, {
             method: "GET",
             credentials: "include" as RequestCredentials
         });
@@ -13,7 +16,7 @@ async function getCategoryById(categoryId: string) {
 
 export async function getAllCategories() {
 
-    //  const response = await fetch(`${process.env.API_SERVER_URL}/api/category/`, {
+    //  const response = await fetch(`${apiUrl}/api/category/`, {
     //         method: "GET",
     //         credentials: "include" as RequestCredentials
     //     });

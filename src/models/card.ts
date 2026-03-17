@@ -10,6 +10,7 @@ export interface CardCollectionShort {
     categories: Category[],
     favorite: boolean,
     cardCount: number,
+    color: typeof CollectionColor
 }
 
 export interface CardCollection extends CardCollectionShort {
@@ -24,7 +25,7 @@ export type CardModel = {
     notes: string
 }
 
-export const Color = {
+export const CollectionColor = {
     RED: "red",
     BLUE: "blue",
 } as const

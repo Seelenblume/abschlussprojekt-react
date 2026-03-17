@@ -2,6 +2,8 @@ import { testCardCollections } from "../test/testdata";
 import type { CardCollection } from "../models/card";
 import type { Category } from "../models/category";
 
+const apiUrl = import.meta.env.VITE_API_URL
+
 export async function getCollectionsBySearch(search: string) {
 
     //  const response = await fetch(`${process.env.API_SERVER_URL}/api/collection/user/${userId}`, {
@@ -12,6 +14,18 @@ export async function getCollectionsBySearch(search: string) {
     //     return loadedData;
 
     return testCardCollections
+}
+
+export async function getPopularCollections() {
+
+     const response = await fetch(`${apiUrl}/collections/popular`, {
+            method: "GET",
+            credentials: "include" as RequestCredentials
+        });
+        const loadedData: CardCollection[] = await response.json();
+        return loadedData;
+
+    // return testCardCollections
 }
 
 export async function getCardCollectionById(collectionId: string) {

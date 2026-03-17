@@ -31,6 +31,10 @@
     --body-background: #F7F7F7;
     --border-color: rgb(232, 232, 232);
 
+    --collection-color-red: var(--accent-red);
+    --collection-color-blue: rgb(100, 141, 234);
+    --collection-color-green: var(--secondary-color);
+
     --width: 80rem;
 
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import type { CardModel } from '../../models/card'
+import styles from "./CardSmall.module.css"
 
 interface Props {
     card: CardModel
@@ -7,9 +8,9 @@ interface Props {
 
 const CardSmall = (props: Props) => {
   return (
-    <div>
-        {props.card.front}
-        {props.card.back}
+    <div className={styles.cardSmall}>
+        <p>Front: {props.card.front}</p>
+        <p>Back: {props.card.back}</p>
     </div>
   )
 }

@@ -1,28 +1,30 @@
 import type { LoginInfo } from "../models/loginInfo";
 
-export async function getLogin() {
-        // const url = `${process.env.API_SERVER_URL}/verify_login`;
+const apiUrl = import.meta.env.VITE_API_URL
 
-        // const response = await fetch(url, {
-        //         method: "GET",
-        //         headers: {
-        //                 'Content-Type': 'application/json',
-        //         },
-        //         credentials: "include" as RequestCredentials
-        // });
-        // if (response.ok) {
-        //         const loginInfo: LoginInfo | false = await response.json();
-        //         return loginInfo;
-        // }
-        // if (response.status === 401) {
-        //         throw new Error(` ${response.statusText}`);
-        // }
-        // throw new Error(` ${response.statusText}`);
-        return{userId: "0000", userName: "kiko", email: ""}
+export async function getLogin() {
+        // return{userId: "0000", userName: "kiko", email: ""}
+        const url = `${apiUrl}/login`;
+
+        const response = await fetch(url, {
+                method: "GET",
+                headers: {
+                        'Content-Type': 'application/json',
+                },
+                credentials: "include" as RequestCredentials
+        });
+        if (response.ok) {
+                const loginInfo: LoginInfo | false = await response.json();
+                return loginInfo;
+        }
+        if (response.status === 401) {
+                throw new Error(` ${response.statusText}`);
+        }
+        throw new Error(` ${response.statusText}`);
 }
 
 export async function deleteLogin() {
-        const url = `${process.env.API_SERVER_URL}/logout`;
+        const url = `${apiUrl}/logout`;
         const response = await fetch(url, {
                 method: "DELETE",
                 credentials: "include"
@@ -33,34 +35,8 @@ export async function deleteLogin() {
         throw new Error(`Error logging out, status: ${response.status}`);
 }
 
-// export async function postLogin(input: string, password: string) {
-//         const url = `${process.env.API_SERVER_URL}/login`;
-
-//         const response = await fetch(url, {
-//                 method: "POST",
-//                 headers: {
-//                         "Content-Type": "application/json"
-//                 },
-//                 credentials: "include" as RequestCredentials,
-//                 body: JSON.stringify({ name, password })
-//         });
-//         console.log(response)
-//         if (response.ok) {
-//                 const loginInfo: LoginInfo = await response.json();
-//                 //     const loginInfo = await response.json();
-//                 return loginInfo;
-//         }
-
-//         if (response.status === 401) {
-//                 throw new Error("Invalid credentials");
-//         }
-
-//         throw new Error(`${response.statusText}`);
-// }
-
 export async function signIn(email: string, password: string,) {
-        // const url = `http://localhost:3002/api/signup`;
-        const url = `${process.env.API_SERVER_URL}/signup`;
+        const url = `${apiUrl}/login`;
 
         const response = await fetch(url, {
                 method: "POST",
@@ -89,7 +65,7 @@ export async function signIn(email: string, password: string,) {
 
 export async function signUp(email: string, password: string, userName: string) {
         // const url = `http://localhost:3002/api/signup`;
-        const url = `${process.env.API_SERVER_URL}/signup`;
+        const url = `${apiUrl}/signup`;
 
         const response = await fetch(url, {
                 method: "POST",
@@ -100,7 +76,7 @@ export async function signUp(email: string, password: string, userName: string) 
                 body: JSON.stringify({
                         email: email,
                         password: password,
-                        userName: userName,
+                        name: userName,
                 })
         });
 

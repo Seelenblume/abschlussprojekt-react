@@ -3,6 +3,7 @@ import styles from "./NavBar.module.css";
 import SearchBar from '../Search/SearchBar';
 import { LucidePlus } from 'lucide-react';
 import { useLoginContext } from '../../context/LoginContext';
+import CategoryList from './CategoryList';
 
 const Navbar = () => {
 
@@ -14,6 +15,7 @@ const Navbar = () => {
                 <Link to="/">
                     <img src="/logo.png" alt='logo' />
                 </Link>
+                <CategoryList />
                 <SearchBar />
                 <div className={styles.links}>
                     <Link to={loginInfo ? "/collection/create" : "/sign-in"} className={styles.create}>
@@ -24,8 +26,8 @@ const Navbar = () => {
                     {loginInfo &&
                     <Link to={`user/${loginInfo.userId}`}><p>My Account</p></Link>
                 }
-                {loginInfo ? <p onClick={() => setLoginInfo(false)}>Sign Out</p>  : <Link to={"/sign-in"}>
-                        <p>Sign In</p>
+                {loginInfo ? <p onClick={() => setLoginInfo(false)}>Sign Out</p>  : <Link to={"/sign-up"}>
+                        <p>Sign Up</p>
                     </Link>}
                    
                 </div>

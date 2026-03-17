@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
-import { getCardCollectionById, updateCard } from '../../api/cardsApi'
+import { getCardCollectionById, postCard, updateCard } from '../../api/cardsApi'
 import CardModal from '../AddCard/CardModal'
 import styles from "./AllCards.module.css"
 import CardSmall from '../../components/Card/CardSmall'
 import type { CardCollection, CardModel } from '../../models/card'
+import { LucideEdit, LucidePlus } from 'lucide-react'
 
 const AllCards = () => {
-
     const params = useParams();
     const collectionId = params.collectionId
 
@@ -28,7 +28,7 @@ const AllCards = () => {
             }
         }
         load();
-    }, [collectionId])
+    }, [collectionId, handleAddCard])
 
     if (!collection) {
         return
@@ -42,23 +42,44 @@ const AllCards = () => {
         }
     }
 
+    async function handleAddCard(front: string, back: string, notes: string) {
+        try {
+            if (collection) {
+                await postCard(collection.id, front, back, notes);
+                console.log("handle", front)
+            } else {
+                throw Error("")
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
-        <div>
+        <div >
+            <button className={styles.addCard} onClick={() => { }}>
+                <LucidePlus />
+            </button>
+            {showModal && <CardModal onModalClose={() => setShowModal(false)}
+                onAddCard={(front, back, notes) => handleAddCard(front, back, notes)} />}
             <div className={styles.cardsList}>
                 {showModal && selectedCard &&
-                <CardModal 
-                update 
-                onModalClose={() => setShowModal(false)} 
-                onAddCard={(front, back, notes) => handleUpdateCard(selectedCard.id, front, back, notes)} />}
+                    <CardModal
+                        update
+                        onModalClose={() => setShowModal(false)}
+                        onAddCard={(front, back, notes) => handleUpdateCard(selectedCard.id, front, back, notes)} />}
 
                 {collection.cards.map((card) =>
                     <>
                         <div className={styles.card}>
                             <CardSmall card={card} />
-                            <button onClick={() => {
-                                setSelectedCard(card)
-                                setShowModal(true)
-                                }}>Edit Card</button>
+                            <div className={styles.below}>
+                                <p className={styles.notesArea}>{card.notes}</p>
+                                <button onClick={() => {
+                                    setSelectedCard(card)
+                                    setShowModal(true)
+                                }}><LucideEdit/></button>
+                            </div>
                         </div>
                     </>
                 )}

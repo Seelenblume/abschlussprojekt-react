@@ -1,7 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import styles from "./Authform.module.css"
 import { useForm, type SubmitHandler } from 'react-hook-form'
+import { signIn, signUp } from '../../api/loginApi'
+import { useToast } from '../../context/ToastContext'
 
 interface Props {
     type: "sign-in" | "sign-up"
@@ -15,19 +17,51 @@ type Inputs = {
 
 const AuthForm = ({ type }: Props) => {
 
+    const navigate = useNavigate()
+
+    const { addNotification } = useToast()
+
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<Inputs>()
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
+    const onSubmit: SubmitHandler<Inputs> = async (data) => {
         if (type === "sign-in") {
-            console.log("sign-in", data)
-
+            try {
+                console.log("sign-in", data)
+                await signIn(data.email, data.password)
+                navigate("/")
+                addNotification({
+                    id: '',
+                    message: 'Signed In!',
+                    type: 'SUCCESS'
+                })
+            } catch (error) {
+                addNotification({
+                    id: '',
+                    message: 'Something went wrong!',
+                    type: 'SUCCESS'
+                })
+            }
         } else {
-            console.log("sign-up", data)
-
+            try {
+                console.log("sign-up", data)
+                await signUp(data.email, data.password, data.userName!)
+                navigate("/")
+                addNotification({
+                    id: '',
+                    message: 'Signed In!',
+                    type: 'SUCCESS'
+                })
+            } catch (error) {
+                 addNotification({
+                    id: '',
+                    message: 'Something went wrong!',
+                    type: 'SUCCESS'
+                })
+            }
         }
     }
 
