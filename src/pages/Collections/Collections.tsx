@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router';
-import type { CardCollection } from '../../models/card';
+import type { CardCollection, CardCollectionShort } from '../../models/card';
 import { getCollectionsBySearch } from '../../api/cardsApi';
-import CollectionCompact from '../../components/Collection/CollectionCompact';
-import { testCardCollections } from '../../test/testdata';
-import styles from "./Collections.module.css"
 import CollectionGrid from '../../components/Collection/CollectionGrid';
 
 const Collections = () => {
@@ -12,7 +9,7 @@ const Collections = () => {
     const [searchParams] = useSearchParams();
     const query = searchParams.get("query");
 
-    const [collections, setCollections] = useState<CardCollection[]>([]);
+    const [collections, setCollections] = useState<CardCollectionShort[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -40,7 +37,7 @@ const Collections = () => {
     }
 
     return (
-        <div className={styles.collections}>
+        <div>
             <CollectionGrid collections={collections}/>
         </div>
     )

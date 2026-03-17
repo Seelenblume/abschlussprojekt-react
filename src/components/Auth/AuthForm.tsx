@@ -73,7 +73,7 @@ const AuthForm = ({ type }: Props) => {
                         <input type='password' {...register("password", {
                             required: "This field is required",
                             maxLength: {
-                                value: 20,
+                                value: 50,
                                 message: "Maximum of 50 characters"
                             }
                         })} placeholder='password' />

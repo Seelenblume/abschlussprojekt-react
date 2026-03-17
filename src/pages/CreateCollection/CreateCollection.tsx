@@ -1,77 +1,128 @@
-import React, { useState } from 'react'
-import { postCardCollection } from '../../api/cardsApi'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router';
 import styles from "./CreateCollection.module.css"
 import type { CardModel } from '../../models/card';
-import { LucidePlus } from 'lucide-react';
+import { Controller, useForm, type SubmitHandler } from 'react-hook-form';
+import type { Category } from '../../models/category';
+import Select from 'react-select';
+import { getAllCategories } from '../../api/categoryApi';
+import { useToast } from '../../context/ToastContext';
+
+type Inputs = {
+  title: string,
+  desc?: string,
+  cards: CardModel[],
+  categories: Category[]
+}
+
 const CreateCollection = () => {
 
   const navigate = useNavigate();
+  const { addNotification } = useToast()
 
-  const [collectionData, setCollectionData] = useState({
-    title: "",
-    desc: "",
-    cards: [],
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>({
+    defaultValues: {
+      title: "",
+      desc: "",
+      cards: [],
+      categories: []
+    }
   })
 
-  const [cards, setCards] = useState<CardModel[]>([]);
 
-  // https://medium.com/@amitsharma_24072/handling-multiple-inputs-in-reactjs-best-practices-for-react-js-input-forms-9b973f4beb7e
-  function handleChange(event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) {
-    event.preventDefault()
-    const { name, value } = event.target;
-    setCollectionData((prev) => ({
-      ...prev,
-      [name]: value
-    })
-    )
-    console.log(collectionData);
-  }
 
-  async function onSubmit(event: React.FormEvent) {
-    event.preventDefault()
-    try {
-      const url = await postCardCollection(collectionData.title, collectionData.desc, [])
-      navigate(url,)
-    } catch (error) {
-      console.log(error);
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    async function load() {
+      try {
+        const cat = await getAllCategories()
+        setCategories(cat)
+      } catch (error) {
+        console.log(error)
+        addNotification({
+          id: `${Date.now()}nwrpgvnbwr`,
+          message: "Something went wrong!",
+          type: "ERROR"
+        })
+      }
     }
+    load()
+  }, [])
+
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data)
+    addNotification({
+      id: `${Date.now()}nwrpgvnbwr`,
+      message: "Collection created!",
+      type: "SUCCESS"
+    })
+    // try {
+    //   const url = await postCardCollection(collectionData.title, collectionData.desc, [])
+    //   navigate(url,)
+    // } catch (error) {
+    //   console.log(error);
+    // }
   }
+
 
   function onCancel() {
     navigate(-1);
   }
 
-async function handleAddCard() {
-  const url = await postCardCollection(collectionData.title, collectionData.desc, collectionData.cards);
-  navigate(url)
-}
-
   return (
     <div className={styles.whole}>
       <h2>Create a Collection</h2>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.inputGroup}>
           <label htmlFor='title'>Title of your collection</label>
-          <input id='title' name='title' onChange={handleChange}className={styles.inputLocal}/>
+          <input id='title' {...register("title", {
+            required: "This field is required",
+            maxLength: {
+              value: 20,
+              message: "Maximum of 20 characters"
+            }
+          })} placeholder='Enter Title...' className={styles.inputLocal} />
+          {errors.title && <p> {errors.title.message}</p>}
         </div>
         <div className={styles.inputGroup}>
-          <label htmlFor='desc'>Description (max 200 chars)</label>
-          <textarea id='desc' name='desc' onChange={handleChange} className={styles.textarea}/>
+          <label htmlFor='desc'>Description</label>
+          <textarea id='desc' {...register("desc", {
+            maxLength: {
+              value: 200,
+              message: "Maximum of 200 characters"
+            }
+          })
+          } className={styles.textarea} />
+          {errors.desc && <p>errors.desc.message</p>}
+
         </div>
 
-        {/* <button type='button' onClick={handleAddCard}><LucidePlus />Add Card</button> */}
 
-        {/* lieber direkt hier für zugriff auf input daten? */}
 
-        <div>
-          <label htmlFor='category'>Add Categories</label>
-          <LucidePlus />
-          <input id='category' list='categorylist' />
-          <datalist id="categorylist">
-            <option value="Language" />
-            <option value="Biology" />
-          </datalist>
+        <div className={styles.inputGroup}>
+          <label htmlFor='category'>Categories</label>
+          <Controller
+            control={control}
+            name="categories"
+            render={({ field }) => (
+              <Select
+                placeholder="Search for Categories..."
+                className={styles.select}
+                isMulti
+                options={categories}
+                value={field.value}
+                onChange={(value) => field.onChange(value)}
+                id='category'
+              />
+            )}
+          />
         </div>
 
         <div className={styles.buttons}>

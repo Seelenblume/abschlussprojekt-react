@@ -8,26 +8,62 @@ import Collection from './pages/Collection/Collection'
 import SignIn from './pages/Auth/SignIn'
 import SignUp from './pages/Auth/SignUp'
 import CreateCollection from './pages/CreateCollection/CreateCollection'
+import { LoginContext } from './context/LoginContext'
+import { useEffect, useState } from 'react'
+import type { LoginInfo } from './models/loginInfo'
+import { getLogin } from './api/loginApi'
+import AllCards from './pages/AllCards/AllCards'
+import { ToastProvider } from './context/ToastProvider'
+import ToastContainer from './components/Toast/ToastContainer'
 
 function App() {
 
+  const [loginInfo, setLoginInfo] = useState<LoginInfo | false>(false);
+
+  useEffect(() => {
+    async function load() {
+      try {
+        const actLogin = await getLogin();
+        setLoginInfo(actLogin);
+        console.log(actLogin)
+      } catch (err) {
+        setLoginInfo(false);
+        console.log(err)
+        // toast({
+        //     variant: 'destructive',
+        //     description: `Error with getLogin: ${String(err)}`
+        // })
+      }
+    }
+    load();
+  }, [])
+
   return (
     <>
-      
-        <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/user/:userId" element={<UserProfile />} />
-            <Route path="/user/:userId/collection/:collectionId" element={<UserProfile />} />
-            <Route path="/collections" element={<Collections />} />
-            <Route path="/collection/:collectionId" element={<Collection />} />
-            <Route path="/collection/create" element={<CreateCollection />} />
-            <Route path="/sign-in" element={<SignIn />} />
-            <Route path="/sign-up" element={<SignUp />} />
-          </Routes>
-          </Layout>
-        </BrowserRouter>
+      <LoginContext.Provider value={{
+        loginInfo: loginInfo,
+        setLoginInfo: setLoginInfo
+      }}>
+        <ToastProvider>
+          <ToastContainer />
+          <BrowserRouter>
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/user/:userId" element={<UserProfile />} />
+                <Route path="/user/:userId/collection/:collectionId" element={<UserProfile />} />
+                <Route path="/collections" element={<Collections />} />
+                <Route path="/collection/:collectionId" element={<Collection />} />
+                <Route path="/collection/:collectionId/cards" element={<AllCards />} />
+                <Route path="/collection/create" element={<CreateCollection />} />
+                <Route path="/sign-in" element={<SignIn />} />
+                <Route path="/sign-up" element={<SignUp />} />
+              </Routes>
+            </Layout>
+          </BrowserRouter>
+
+        </ToastProvider>
+      </LoginContext.Provider>
     </>
   )
 }

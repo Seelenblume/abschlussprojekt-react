@@ -1,22 +1,27 @@
 import type { CardCollection } from "../models/card";
+import type { Category } from "../models/category";
 
 export const testCardCollections: CardCollection[] = [
     {
         id: "col-001",
-        user: {id: "user-123", name: "REZE"},
+        user: {id: "0000", name: "kiko"},
         title: "TypeScript Deep Dive",
         description: "Fortgeschrittene TypeScript Konzepte",
         categories: [
             {
-                name: "Typen",
+                label: "Typen",
+                value: "Typen",
             },
             {
-                name: "Typen",
+                label: "Typen",
+                value: "Typen",
             },
             {
-                name: "Generics",
+                label: "Typen",
+                value: "Typen",
             }
         ],
+        favorite: true,
         cards: [
             {
                 id: "card-001",
@@ -29,12 +34,67 @@ export const testCardCollections: CardCollection[] = [
                 front: "Warum sind Generics wichtig?",
                 back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
                 notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
             }
-        ]
+        ],
+        cardCount: 12
     },
     {
         id: "col-002",
-        user: {id: "user-123", name: "DENJI"},
+        user: {id: "0000", name: "DENJI"},
         title: "Biologie Grundlagen",
         description: "Grundlagen der Biologie mit Kategorien",
         categories: [
@@ -56,6 +116,48 @@ export const testCardCollections: CardCollection[] = [
                 id: "card-004",
                 front: "Wofür steht DNA?",
                 back: "Desoxyribonukleinsäure",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
+                notes: ""
+            },
+            {
+                id: "card-002",
+                front: "Warum sind Generics wichtig?",
+                back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
                 notes: ""
             }
         ]
@@ -181,3 +283,38 @@ export const testCardCollections: CardCollection[] = [
         ]
     }
 ];
+
+export const testCategories: Category[] = [
+    {
+        label: "CATEGORY_LABEL",
+        value: "Category value"
+    },
+    {
+        label: "CATEGORY_LABEL",
+        value: "Category value"
+    },
+    {
+        label: "CATEGORY_LABEL",
+        value: "Category value"
+    },
+    {
+        label: "CATEGORY_LABEL",
+        value: "Category value"
+    },
+    {
+        label: "CATEGORY_LABEL",
+        value: "Category value"
+    },
+    {
+        label: "CATEGORY_LABEL",
+        value: "Category value"
+    },
+    {
+        label: "CATEGORY_LABEL",
+        value: "Category value"
+    },
+    {
+        label: "CATEGORY_LABEL",
+        value: "Category value"
+    },
+]

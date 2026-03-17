@@ -1,0 +1,18 @@
+.cardsList {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    width: fit-content;
+    align-items: center;
+
+    button {
+        width: 50%;
+    }
+}

@@ -20,8 +20,8 @@ const Carousel = ({collection}: Props) => {
         className={styles.cards}
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-        {collection.cards.map((card) => (
-          <div className={styles.card} key={card.id}>
+        {collection.cards.map((card, index) => (
+          <div className={styles.card} key={index}>
             <Card card={card} />
           </div>
         ))}

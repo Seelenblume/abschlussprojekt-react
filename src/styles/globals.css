@@ -3,17 +3,11 @@
 @tailwind utilities;
 
 button {
-    border-radius: var(--border-radius);
-    border: 1px solid transparent;
-    font-size: 1em;
-    background-color: #d8e2dd;
     cursor: pointer;
-    transition: border-color 0.25s;
     padding: 0.5rem;
 }
 
 button:hover {
-    border-color: #646cff;
 }
 
 button:focus,
@@ -22,7 +16,7 @@ button:focus-visible {
 }
 
 input {
-    border: 1px solid black;
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
     padding: 0.5rem;
 
@@ -34,17 +28,6 @@ textarea {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-@media (prefers-color-scheme: light) {
-    :root {
-        color: #213547;
-        background-color: #ffffff;
-    }
-
-    a:hover {
-        color: #747bff;
-    }
-
-    button {
-        background-color: #f9f9f9;
-    }
+body {
+    background-color: var(--body-background);
 }
