@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import type { LoginInfo } from "../models/loginInfo";
+import type { LoginInfo } from "../../models/loginInfo";
 
 interface LoginContextType {
     loginInfo: LoginInfo | false | undefined;
@@ -11,3 +11,4 @@ export const LoginContext = createContext<LoginContextType>({} as LoginContextTy
 
 export const useLoginContext = () => useContext(LoginContext);
 
+// einen custom context provider schreiben fürs anmelden ?

@@ -1,10 +1,26 @@
-import React from 'react'
-import { testCategories } from '../../test/testdata'
+import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
 import { useNavigate } from 'react-router'
+import { getAllCategories } from '../../api/categoryApi'
+import type { Category } from '../../models/category'
 
 const CategoryList = () => {
-    const categories = testCategories
+
+    const [categories, setCategories] = useState<Category[]>([])
+
+    useEffect(() => {
+        async function load() {
+          try {
+            const cat = await getAllCategories()
+            setCategories(cat)
+          } catch (error) {
+            // just keep it empty...
+            // console.log(error)
+          }
+        }
+        load()
+      }, [])
+
     const navigate = useNavigate()
 
     return (

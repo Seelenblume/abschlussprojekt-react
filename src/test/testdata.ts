@@ -3,8 +3,8 @@ import type { Category } from "../models/category";
 
 export const testCardCollections: CardCollection[] = [
     {
-        id: "col-001",
-        user: {id: "0000", name: "kiko"},
+        collectionId: "col-001",
+        user: {userId: "0000", name: "kiko"},
         title: "TypeScript Deep Dive",
         description: "Fortgeschrittene TypeScript Konzepte",
         categories: [
@@ -93,8 +93,8 @@ export const testCardCollections: CardCollection[] = [
         cardCount: 12
     },
     {
-        id: "col-002",
-        user: {id: "0000", name: "DENJI"},
+        collectionId: "col-002",
+        user: {userId: "0000", name: "DENJI"},
         title: "Biologie Grundlagen",
         description: "Grundlagen der Biologie mit Kategorien",
         categories: [
@@ -163,8 +163,8 @@ export const testCardCollections: CardCollection[] = [
         ]
     },
     {
-        id: "col-002",
-        user: {id: "user-123", name: "DENJI"},
+        collectionId: "col-002",
+        user: {userId: "user-123", name: "DENJI"},
         title: "Biologie Grundlagen",
         description: "Grundlagen der Biologie mit Kategorien",
         categories: [
@@ -203,8 +203,8 @@ export const testCardCollections: CardCollection[] = [
         ]
     },
     {
-        id: "col-002",
-        user: {id: "user-123", name: "DENJI"},
+        collectionId: "col-002",
+        user: {userId: "user-123", name: "DENJI"},
         title: "Biologie Grundlagen",
         description: "Grundlagen der Biologie mit Kategorien",
         categories: [
@@ -243,8 +243,8 @@ export const testCardCollections: CardCollection[] = [
         ]
     },
     {
-        id: "col-002",
-        user: {id: "user-123", name: "DENJI"},
+        collectionId: "col-002",
+        user: {userId: "user-123", name: "DENJI"},
         title: "Biologie Grundlagen",
         description: "Grundlagen der Biologie mit Kategorien",
         categories: [

@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router'
 import styles from "./Authform.module.css"
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { signIn, signUp } from '../../api/loginApi'
-import { useToast } from '../../context/ToastContext'
+import { useToast } from '../../context/Toast/ToastContext'
+import { useLoginContext } from '../../context/Login/LoginContext'
 
 interface Props {
     type: "sign-in" | "sign-up"
@@ -20,6 +21,7 @@ const AuthForm = ({ type }: Props) => {
     const navigate = useNavigate()
 
     const { addNotification } = useToast()
+    const {setLoginInfo}  = useLoginContext()
 
     const {
         register,
@@ -31,7 +33,8 @@ const AuthForm = ({ type }: Props) => {
         if (type === "sign-in") {
             try {
                 console.log("sign-in", data)
-                await signIn(data.email, data.password)
+                const loginInfo = await signIn(data.email, data.password)
+                setLoginInfo(loginInfo)
                 navigate("/")
                 addNotification({
                     id: '',
@@ -48,8 +51,9 @@ const AuthForm = ({ type }: Props) => {
         } else {
             try {
                 console.log("sign-up", data)
-                await signUp(data.email, data.password, data.userName!)
-                navigate("/")
+                const loginInfo = await signUp(data.email, data.password, data.userName!)
+                setLoginInfo(loginInfo)
+                navigate(`/user/${loginInfo.userId}`)
                 addNotification({
                     id: '',
                     message: 'Signed In!',

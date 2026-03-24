@@ -2,8 +2,8 @@ import { Link } from 'react-router';
 import styles from "./NavBar.module.css";
 import SearchBar from '../Search/SearchBar';
 import { LucidePlus } from 'lucide-react';
-import { useLoginContext } from '../../context/LoginContext';
 import CategoryList from './CategoryList';
+import { useLoginContext } from '../../context/Login/LoginContext';
 
 const Navbar = () => {
 

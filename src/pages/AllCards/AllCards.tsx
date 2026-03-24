@@ -6,6 +6,7 @@ import styles from "./AllCards.module.css"
 import CardSmall from '../../components/Card/CardSmall'
 import type { CardCollection, CardModel } from '../../models/card'
 import { LucideEdit, LucidePlus } from 'lucide-react'
+import { useToast } from '../../context/Toast/ToastContext'
 
 const AllCards = () => {
     const params = useParams();
@@ -15,6 +16,8 @@ const AllCards = () => {
 
     const [showModal, setShowModal] = useState(false);
     const [selectedCard, setSelectedCard] = useState<CardModel | null>(null);
+
+    const {addNotification} = useToast()
 
     useEffect(() => {
         async function load() {
@@ -28,36 +31,52 @@ const AllCards = () => {
             }
         }
         load();
-    }, [collectionId, handleAddCard])
+    }, [collectionId])
 
     if (!collection) {
         return
     }
 
     async function handleUpdateCard(id: string, front?: string, back?: string, notes?: string) {
+        if (!collection) {
+            throw new Error("Keine Collection")
+        }
         try {
             await updateCard(id, front, back, notes)
+            const updatedCollection = await getCardCollectionById(collection.collectionId);
+            setCollection(updatedCollection);
         } catch (error) {
+            addNotification({
+                id: "qwetrz",
+                message: "err",
+                type: "ERROR",
+            })
             console.log(error)
         }
     }
 
     async function handleAddCard(front: string, back: string, notes: string) {
+        if (!collection) {
+            throw new Error("Keine Collection")
+        }
         try {
-            if (collection) {
-                await postCard(collection.id, front, back, notes);
-                console.log("handle", front)
-            } else {
-                throw Error("")
-            }
+            await postCard(collection.collectionId, front, back, notes);
+            console.log("handle", front)
+            const updatedCollection = await getCardCollectionById(collection.collectionId);
+            setCollection(updatedCollection);
         } catch (error) {
+            addNotification({
+                id: "qwetrz",
+                message: "err",
+                type: "ERROR",
+            })
             console.log(error)
         }
     }
 
     return (
         <div >
-            <button className={styles.addCard} onClick={() => { }}>
+            <button className={styles.addCard} onClick={() => {setShowModal(true)}}>
                 <LucidePlus />
             </button>
             {showModal && <CardModal onModalClose={() => setShowModal(false)}
@@ -69,7 +88,7 @@ const AllCards = () => {
                         onModalClose={() => setShowModal(false)}
                         onAddCard={(front, back, notes) => handleUpdateCard(selectedCard.id, front, back, notes)} />}
 
-                {collection.cards.map((card) =>
+                {collection.categories.length !== 0 ? collection.cards.map((card) =>
                     <>
                         <div className={styles.card}>
                             <CardSmall card={card} />
@@ -82,7 +101,7 @@ const AllCards = () => {
                             </div>
                         </div>
                     </>
-                )}
+                ) : <p>Noch keine Karten vorhanden! Um eine Karte zu erstellen, klicke auf das +</p>}
             </div>
         </div>
     )

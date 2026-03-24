@@ -14,34 +14,6 @@
     align-items: center;
 }
 
-.menu {
-    width: 15rem;
-    background-color: var(--primary-color);
-    display: flex;
-    flex-direction: column;
-    border: 1px solid gray;
-    position: absolute;
-    right: 1rem;
-    z-index: 5;
-    border-radius: var(--border-radius);
-
-    div {
-        display: flex;
-        gap: 0.5rem;
-        cursor: pointer;
-        padding: 1rem;
-        border-bottom: 1px solid gray;
-
-        &:last-of-type {
-            border: none;
-        }
-
-        &:hover {
-            background-color: lightgray;
-        }
-    }
-}
-
 .categories {
     display: flex;
     gap: 1rem;
@@ -50,8 +22,10 @@
 
 .info {
     margin-top: 2rem;
+    width: 100%;
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
+    align-items: start;
     gap: 2rem;
 }
 
@@ -78,4 +52,5 @@
     border: 1px solid gray;
     border-radius: var(--border-radius);
     padding: 0.5rem;
+    margin-top: 0.25rem;
 }

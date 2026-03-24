@@ -28,7 +28,7 @@ const Home = () => {
 
       <div className={styles.popular}>
         <h3>Popular Collections</h3>
-        {/* {collections && <CollectionGrid collections={collections} />} */}
+        {collections && <CollectionGrid collections={collections} />}
       </div>
 
     </div>

@@ -3,53 +3,39 @@ import { useParams } from 'react-router'
 import type { User } from '../../models/user';
 import { getUserById } from '../../api/userApi';
 import type { CardCollection } from '../../models/card';
-import { getCardCollectionById, getUserCardCollectionByUserId } from '../../api/cardsApi';
+import { getUserCardCollectionByUserId } from '../../api/cardsApi';
 import CollectionGrid from '../../components/Collection/CollectionGrid';
 import styles from "./UserProfile.module.css"
-import { useLoginContext } from '../../context/LoginContext';
 import LoggedInUserprofile from './LoggedInUserprofile';
 import ProfileBanner from '../../components/Profile/ProfileBanner';
+import { useLoginContext } from '../../context/Login/LoginContext';
 
 const UserProfile = () => {
   const params = useParams();
   const userId = params.userId
 
   const [user, setUser] = useState<User | null>(null);
-  const [collections, setCollections] = useState<CardCollection[]>([]);
+  // const [collections, setCollections] = useState<CardCollection[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const {loginInfo, setLoginInfo} = useLoginContext();
-
-  useEffect(() => {
-    async function load() {
-      if (userId) {
-        try {
-          const result = await getUserById(userId);
-          setUser(result);
-        } catch (error) {
-          console.log(error)
-        } finally {
-          setLoading(false)
-        }
-      }
-    }
-    load()
-  }, [userId])
+  const { loginInfo, setLoginInfo } = useLoginContext();
 
   useEffect(() => {
-    async function load() {
-      if (userId) {
-        try {
-          const collectionsResult = await getUserCardCollectionByUserId(userId)
-          setCollections(collectionsResult)
-        } catch (error) {
-          console.log(error)
-        }
+    async function loadUser() {
+      if (!userId) return;
+      try {
+        const result = await getUserById(userId);
+        setUser(result);
+      } catch (error) {
+        setError((error as Error).message)
+      } finally {
+        setLoading(false)
       }
     }
-    load()
-  }, [userId])
 
+    loadUser();
+  }, [userId]);
 
   if (loading) {
     return <p>Loading...</p>
@@ -59,21 +45,27 @@ const UserProfile = () => {
     return
   }
 
+  if (error) {
+    return <p>{error}</p>
+  }
+
   return (
     <>
-    {loginInfo && loginInfo.userId === user.id ?  
-    <LoggedInUserprofile collections={collections} user={user}/> : <div className={styles.profile}>
+      {loginInfo && loginInfo.userId === user.userId ?
+        <LoggedInUserprofile collections={user.collections} user={user} /> :
 
-      <ProfileBanner username={user.name}/>
-      <div className={styles.collections}>
-        <h2>Sammlungen</h2>
-        {collections.length !== 0 ? <CollectionGrid collections={collections} /> : <p>Dieser User hat keine Sammlungen</p>}
-      </div>
+        <div className={styles.profile}>
 
-    </div>}
-     
+          <ProfileBanner username={user.name} />
+          <div className={styles.collections}>
+            <h2>Sammlungen</h2>
+            {user.collections && user.collections.length !== 0 ? <CollectionGrid collections={user.collections} /> : <p>Dieser User hat keine Sammlungen</p>}
+          </div>
+
+        </div>}
+
     </>
-   
+
   )
 }
 

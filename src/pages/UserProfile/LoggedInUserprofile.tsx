@@ -6,36 +6,44 @@ import styles from "./LoggedInUserProfile.module.css"
 import type { User } from '../../models/user'
 import ProfileBanner from '../../components/Profile/ProfileBanner'
 
-export default function LoggedInUserprofile({ collections, user }: { collections: CardCollection[], user: User }) {
-
+export default function LoggedInUserprofile({ collections, user }: { collections?: CardCollection[], user: User }) {
   const [savedCollections, setSavedCollections] = useState<CardCollection[]>([])
 
   const [showSaved, setShowSaved] = useState(false);
 
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+
   useEffect(() => {
     async function load() {
       try {
-
-        const collections = await getSavedCollectionsByUserId(user.id)
+        const collections = await getSavedCollectionsByUserId(user.userId)
         setSavedCollections(collections)
       } catch (error) {
         console.log(error)
+        setError((error as Error).message)
+      } finally {
+        setLoading(false)
       }
     }
     load();
   }, [user])
 
+  if (loading) {
+    return <p>Loading...</p>
+  }
+
   return (
     <div>
-      <h1>My Account</h1>
+      <h1>Mein Konto</h1>
       <ProfileBanner username={user.name}/>
       <div className={styles.switch}>
-        <span className={`${!showSaved && styles.show}`} onClick={() => setShowSaved(false)}>My collections</span>
-        <span className={`${showSaved && styles.show}`} onClick={() => setShowSaved(true)}>My saved collections</span>
+        <span className={`${!showSaved && styles.show}`} onClick={() => setShowSaved(false)}>Meine Sammlungen</span>
+        <span className={`${showSaved && styles.show}`} onClick={() => setShowSaved(true)}>Meine gespeicherten Sammlungen</span>
       </div>
 
-      {showSaved ? <CollectionGrid collections={savedCollections} /> :
-        <CollectionGrid collections={collections} />}
+      {showSaved ? (savedCollections && savedCollections.length !== 0 ? <CollectionGrid collections={savedCollections} /> : <p>Keine Sammlungen gespeichert</p>) :
+        (collections ? <CollectionGrid collections={collections} /> : <p>Noch keine eigenen Sammlungen</p>)}
     </div>
   )
 }

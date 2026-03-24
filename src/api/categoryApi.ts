@@ -6,7 +6,7 @@ const apiUrl = import.meta.env.VITE_API_URL
 
 async function getCategoryById(categoryId: string) {
 
-     const response = await fetch(`${apiUrl}/api/category/${categoryId}`, {
+     const response = await fetch(`${apiUrl}/category/${categoryId}`, {
             method: "GET",
             credentials: "include" as RequestCredentials
         });
@@ -15,13 +15,11 @@ async function getCategoryById(categoryId: string) {
 }
 
 export async function getAllCategories() {
-
-    //  const response = await fetch(`${apiUrl}/api/category/`, {
-    //         method: "GET",
-    //         credentials: "include" as RequestCredentials
-    //     });
-    //     const loadedData: Category[] = await response.json();
-    //     return loadedData;
-    return testCategories
+     const response = await fetch(`${apiUrl}/categories`, {
+            method: "GET",
+            credentials: "include" as RequestCredentials
+        });
+        const loadedData: Category[] = await response.json();
+        return loadedData;
 }
 

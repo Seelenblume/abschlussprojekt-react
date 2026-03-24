@@ -5,22 +5,19 @@ import { deleteBookmark, getCardCollectionById, postBookmark, postCard } from ".
 import style from "./Collection.module.css"
 import Carousel from "../../components/Collection/Carousel";
 import CategoryTag from "../../components/Categories/CategoryTag";
-import { useLoginContext } from "../../context/LoginContext";
 import CardModal from "../AddCard/CardModal";
 import { LucideBookmark, LucideEllipsisVertical, LucideLibraryBig, LucidePlus } from "lucide-react";
-import { useToast } from "../../context/ToastContext";
+import { useLoginContext } from "../../context/Login/LoginContext";
+import { useToast } from "../../context/Toast/ToastContext";
+
 
 const Collection = () => {
 
     const params = useParams()
     const collectionId = params.collectionId;
 
-    const menu = useRef<HTMLDivElement | null>(null);
-
     const [collection, setCollection] = useState<CardCollection | null>(null);
     const [loading, setLoading] = useState(true);
-
-    const [showModal, setShowModal] = useState(false)
 
     const [bookmark, setBookmark] = useState(false)
 
@@ -61,7 +58,7 @@ const Collection = () => {
         try {
             if (collection) {
                 if (bookmark) {
-                    await deleteBookmark(collection.user.id, collection.id)
+                    await deleteBookmark(collection.user.userId, collection.collectionId)
                     setBookmark(false)
                     addNotification({
                         id: "ioahf",
@@ -69,7 +66,7 @@ const Collection = () => {
                         message: "Bookmark removed!"
                     })
                 } else {
-                    await postBookmark(collection.user.id, collection.id)
+                    await postBookmark(collection.user.userId, collection.collectionId)
                     setBookmark(true)
                     addNotification({
                         id: "ioahf",
@@ -95,7 +92,7 @@ const Collection = () => {
                     <h1>{collection.title}</h1>
                     <span onClick={handleBookmark}>{bookmark ? <LucideBookmark /> : <LucideBookmark fill="black" />}</span>
                 </div>
-                {loginInfo && (loginInfo.userId == collection.user.id) &&
+                {loginInfo && (loginInfo.userId == collection.user.userId) &&
                     <button onClick={() => navigate(`/collection/${collectionId}/cards`)}><LucideLibraryBig /><p>Alle Karten ansehen</p></button>
                 }
             </div>
@@ -109,15 +106,16 @@ const Collection = () => {
             </div>
             <Carousel collection={collection} />
             <div className={style.info}>
-                <div className={style.desc}>
-                    {collection.description}
-                </div>
+                
                 <div className={style.profile}>
-                    <h3>Creator</h3>
+                    <h3>Ersteller</h3>
                     <div className={style.name}>
                         <img src="../src/assets/react.svg" />
-                        <Link to={`/user/${collection.user.id}`}>{collection.user.name}</Link>
+                        <Link to={`/user/${collection.user.userId}`}>{collection.user.name}</Link>
                     </div>
+                </div>
+                <div className={style.desc}>
+                    {collection.description ? <p>{collection.description}</p> : <p>Diese Sammlung hat keine Beschreibung.</p>}
                 </div>
             </div>
 

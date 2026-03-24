@@ -5,7 +5,7 @@ interface ProviderProps {
     children: ReactNode;
 }
 
-export const ToastProvider = ({children}: ProviderProps) => {
+export const ToastProvider = ({ children }: ProviderProps) => {
 
     const [list, setList] = useState<ToastNotification[]>([]);
 
@@ -21,20 +21,20 @@ export const ToastProvider = ({children}: ProviderProps) => {
     }
 
     useEffect(() => {
-        function load() {
-            list.forEach((notification) => {
-                const timeoutId = setTimeout(() => {
-                    removeNotification(notification.id);
-                }, 3000)
-                return () => clearTimeout(timeoutId)
-            })
-        }
-        load();
-    }, [list])
+        const timeouts = list.map(notification =>
+            setTimeout(() => {
+                removeNotification(notification.id);
+            }, 3000)
+        );
+
+        return () => {
+            timeouts.forEach(clearTimeout);
+        };
+    }, [list]);
 
     return (
         <ToastContext.Provider value={{
-            list, 
+            list,
             addNotification,
             removeNotification,
         }}>

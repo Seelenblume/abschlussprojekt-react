@@ -8,52 +8,48 @@ import Collection from './pages/Collection/Collection'
 import SignIn from './pages/Auth/SignIn'
 import SignUp from './pages/Auth/SignUp'
 import CreateCollection from './pages/CreateCollection/CreateCollection'
-import { LoginContext } from './context/LoginContext'
 import { useEffect, useState } from 'react'
 import type { LoginInfo } from './models/loginInfo'
 import { getLogin } from './api/loginApi'
 import AllCards from './pages/AllCards/AllCards'
-import { ToastProvider } from './context/ToastProvider'
-import ToastContainer from './components/Toast/ToastContainer'
-import { useToast } from './context/ToastContext'
+import { LoginContext } from './context/Login/LoginContext'
+import { useToast } from './context/Toast/ToastContext'
 
 function App() {
 
   const [loginInfo, setLoginInfo] = useState<LoginInfo | false>(false);
 
-  const {addNotification} = useToast()
+  const { addNotification } = useToast()
 
   useEffect(() => {
-    async function load() {
-      try {
-        const actLogin = await getLogin();
-        setLoginInfo(actLogin);
-        console.log(actLogin)
-      } catch (err) {
-        setLoginInfo(false);
-        console.log(err)
-        addNotification({
-          id: "oavnda",
-            type: 'ERROR',
-            message: `Error with getLogin: ${String(err)}`
-        })
-      }
-    }
-    load();
-  }, [])
+        const f = async () => {
+            try {
+                const actLogin = await getLogin();
+                setLoginInfo(actLogin);
+            } catch (err) {
+                setLoginInfo(false);
+                addNotification({
+                  id: "136",
+                  message: "Something",
+                  type: "ERROR",
+                })
+                console.log(err)
+            }
+        }
+        f();
+    }, [])
 
   return (
     <>
-      <LoginContext.Provider value={{
-        loginInfo: loginInfo,
-        setLoginInfo: setLoginInfo
-      }}>
+        <LoginContext.Provider value={{
+          loginInfo: loginInfo,
+          setLoginInfo: setLoginInfo
+        }}>
           <BrowserRouter>
             <Layout>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/user/:userId" element={<UserProfile />} />
-                <Route path="/user/:userId/collection/:collectionId" element={<UserProfile />} />
                 <Route path="/collections" element={<Collections />} />
                 <Route path="/collection/:collectionId" element={<Collection />} />
                 <Route path="/collection/:collectionId/cards" element={<AllCards />} />
@@ -63,7 +59,7 @@ function App() {
               </Routes>
             </Layout>
           </BrowserRouter>
-      </LoginContext.Provider>
+        </LoginContext.Provider>
     </>
   )
 }

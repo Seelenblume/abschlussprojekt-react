@@ -1,9 +1,8 @@
 import type { Category } from "./category"
 import type { User } from "./user"
 
-
-export interface CardCollectionShort {
-    id: string,
+export interface CardCollection {
+    collectionId: string,
     user: User,
     title: string,
     description: string,
@@ -11,9 +10,6 @@ export interface CardCollectionShort {
     favorite: boolean,
     cardCount: number,
     color: typeof CollectionColor
-}
-
-export interface CardCollection extends CardCollectionShort {
     cards: CardModel[],
 }
 

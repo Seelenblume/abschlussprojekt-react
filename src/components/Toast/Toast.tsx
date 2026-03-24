@@ -1,7 +1,7 @@
-import type { NotificationType } from '../../context/ToastContext'
 import { LucideX } from 'lucide-react';
 import styles from "./Toast.module.css"
 import clsx from 'clsx';
+import type { NotificationType } from '../../context/Toast/ToastContext';
 
 interface ToastProps {
   id: string;
