@@ -52,7 +52,7 @@ const UserProfile = () => {
   return (
     <>
       {loginInfo && loginInfo.userId === user.userId ?
-        <LoggedInUserprofile collections={user.collections} user={user} /> :
+        <LoggedInUserprofile user={user} /> :
 
         <div className={styles.profile}>
 

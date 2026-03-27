@@ -6,7 +6,7 @@ import styles from "./LoggedInUserProfile.module.css"
 import type { User } from '../../models/user'
 import ProfileBanner from '../../components/Profile/ProfileBanner'
 
-export default function LoggedInUserprofile({ collections, user }: { collections?: CardCollection[], user: User }) {
+export default function LoggedInUserprofile({ user }: { user: User }) {
   const [savedCollections, setSavedCollections] = useState<CardCollection[]>([])
 
   const [showSaved, setShowSaved] = useState(false);
@@ -43,7 +43,7 @@ export default function LoggedInUserprofile({ collections, user }: { collections
       </div>
 
       {showSaved ? (savedCollections && savedCollections.length !== 0 ? <CollectionGrid collections={savedCollections} /> : <p>Keine Sammlungen gespeichert</p>) :
-        (collections ? <CollectionGrid collections={collections} /> : <p>Noch keine eigenen Sammlungen</p>)}
+        (user.collections ? <CollectionGrid collections={user.collections} /> : <p>Noch keine eigenen Sammlungen</p>)}
     </div>
   )
 }

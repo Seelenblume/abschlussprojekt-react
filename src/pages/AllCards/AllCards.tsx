@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { getCardCollectionById, postCard, updateCard } from '../../api/cardsApi'
 import CardModal from '../AddCard/CardModal'
@@ -88,7 +88,7 @@ const AllCards = () => {
                         onModalClose={() => setShowModal(false)}
                         onAddCard={(front, back, notes) => handleUpdateCard(selectedCard.id, front, back, notes)} />}
 
-                {collection.categories.length !== 0 ? collection.cards.map((card) =>
+                {collection.cardCount !== 0 ? collection.cards.map((card) =>
                     <>
                         <div className={styles.card}>
                             <CardSmall card={card} />
