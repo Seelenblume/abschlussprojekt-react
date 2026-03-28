@@ -1,10 +1,11 @@
-import React from 'react'
+import { Link } from "react-router"
+import type { Category } from "../../models/category"
 import styles from "./CategoryTag.module.css"
 
-const CategoryTag = ({categoryName}:{categoryName: string}) => {
+const CategoryTag = ({category}:{category: Category}) => {
   return (
     <div className={styles.tag}>
-        <p>{categoryName}</p>
+        <Link to={`/collections?category=${category.value}`}>{category.label}</Link>
     </div>
   )
 }

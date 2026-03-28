@@ -24,67 +24,67 @@ export const testCardCollections: CardCollection[] = [
         favorite: true,
         cards: [
             {
-                id: "card-001",
+                cardId: "card-001",
                 front: "Was ist ein Union Type?",
                 back: "Ein Typ, der mehrere mögliche Typen erlaubt, z.B. string | number.",
                 notes: ""
             },
             {
-                id: "card-002",
+                cardId: "card-002",
                 front: "Warum sind Generics wichtig?",
                 back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
                 notes: ""
             },
             {
-                id: "card-002",
+                cardId: "card-002",
                 front: "Warum sind Generics wichtig?",
                 back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
                 notes: ""
             },
             {
-                id: "card-002",
+                cardId: "card-002",
                 front: "Warum sind Generics wichtig?",
                 back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
                 notes: ""
             },
             {
-                id: "card-002",
+                cardId: "card-002",
                 front: "Warum sind Generics wichtig?",
                 back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
                 notes: ""
             },
             {
-                id: "card-002",
+                cardId: "card-002",
                 front: "Warum sind Generics wichtig?",
                 back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
                 notes: ""
             },
             {
-                id: "card-002",
+                cardId: "card-002",
                 front: "Warum sind Generics wichtig?",
                 back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
                 notes: ""
             },
             {
-                id: "card-002",
+                cardId: "card-002",
                 front: "Warum sind Generics wichtig?",
                 back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
                 notes: ""
             },
             {
-                id: "card-002",
+                cardId: "card-002",
                 front: "Warum sind Generics wichtig?",
                 back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
                 notes: ""
             },
             {
-                id: "card-002",
+                cardId: "card-002",
                 front: "Warum sind Generics wichtig?",
                 back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
                 notes: ""
             },
             {
-                id: "card-002",
+                cardId: "card-002",
                 front: "Warum sind Generics wichtig?",
                 back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
                 notes: ""
@@ -107,55 +107,55 @@ export const testCardCollections: CardCollection[] = [
         ],
         cards: [
             {
-                id: "card-003",
+                cardId: "card-003",
                 front: "Was ist die Funktion der Mitochondrien?",
                 back: "Energieproduktion der Zelle (ATP).",
                 notes: "Kraftwerk der Zelle ocbH QcpÄQDÜOC wvjn wfowopjvowufvbebvoup nwovjbüuw"
             },
             {
-                id: "card-004",
+                cardId: "card-004",
                 front: "Wofür steht DNA?",
                 back: "Desoxyribonukleinsäure",
                 notes: ""
             },
             {
-                id: "card-002",
+                cardId: "card-002",
                 front: "Warum sind Generics wichtig?",
                 back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
                 notes: ""
             },
             {
-                id: "card-002",
+                cardId: "card-002",
                 front: "Warum sind Generics wichtig?",
                 back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
                 notes: ""
             },
             {
-                id: "card-002",
+                cardId: "card-002",
                 front: "Warum sind Generics wichtig?",
                 back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
                 notes: ""
             },
             {
-                id: "card-002",
+                cardId: "card-002",
                 front: "Warum sind Generics wichtig?",
                 back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
                 notes: ""
             },
             {
-                id: "card-002",
+                cardId: "card-002",
                 front: "Warum sind Generics wichtig?",
                 back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
                 notes: ""
             },
             {
-                id: "card-002",
+                cardId: "card-002",
                 front: "Warum sind Generics wichtig?",
                 back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
                 notes: ""
             },
             {
-                id: "card-002",
+                cardId: "card-002",
                 front: "Warum sind Generics wichtig?",
                 back: "Sie ermöglichen typsichere Wiederverwendbarkeit von Code.",
                 notes: ""
@@ -189,13 +189,13 @@ export const testCardCollections: CardCollection[] = [
         ],
         cards: [
             {
-                id: "card-003",
+                cardId: "card-003",
                 front: "Was ist die Funktion der Mitochondrien?",
                 back: "Energieproduktion der Zelle (ATP).",
                 notes: "Kraftwerk der Zelle"
             },
             {
-                id: "card-004",
+                cardId: "card-004",
                 front: "Wofür steht DNA?",
                 back: "Desoxyribonukleinsäure",
                 notes: ""
@@ -229,13 +229,13 @@ export const testCardCollections: CardCollection[] = [
         ],
         cards: [
             {
-                id: "card-003",
+                cardId: "card-003",
                 front: "Was ist die Funktion der Mitochondrien?",
                 back: "Energieproduktion der Zelle (ATP).",
                 notes: "Kraftwerk der Zelle"
             },
             {
-                id: "card-004",
+                cardId: "card-004",
                 front: "Wofür steht DNA?",
                 back: "Desoxyribonukleinsäure",
                 notes: ""
@@ -269,13 +269,13 @@ export const testCardCollections: CardCollection[] = [
         ],
         cards: [
             {
-                id: "card-003",
+                cardId: "card-003",
                 front: "Was ist die Funktion der Mitochondrien?",
                 back: "Energieproduktion der Zelle (ATP).",
                 notes: "Kraftwerk der Zelle"
             },
             {
-                id: "card-004",
+                cardId: "card-004",
                 front: "Wofür steht DNA?",
                 back: "Desoxyribonukleinsäure",
                 notes: ""

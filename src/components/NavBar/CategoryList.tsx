@@ -1,67 +1,43 @@
-import React, { useEffect, useState } from 'react'
-import Select from 'react-select'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { getAllCategories } from '../../api/categoryApi'
 import type { Category } from '../../models/category'
+import { Menu, MenuItem } from '@szhsin/react-menu'
+import "@szhsin/react-menu/dist/core.css";
+import styles from "./CategoryList.module.css"
+
 
 const CategoryList = () => {
 
     const [categories, setCategories] = useState<Category[]>([])
+    
+    const navigate = useNavigate()
 
     useEffect(() => {
         async function load() {
-          try {
-            const cat = await getAllCategories()
-            setCategories(cat)
-          } catch (error) {
-            // just keep it empty...
-            // console.log(error)
-          }
+            try {
+                const cat = await getAllCategories()
+                setCategories(cat)
+            } catch (error) {
+                // just keep it empty...
+                // console.log(error)
+            }
         }
         load()
-      }, [])
-
-    const navigate = useNavigate()
+    }, [])
 
     return (
-        <div>
-            <Select styles={{
-                control: (base) => ({
-                    ...base,
-                    width: "10rem",
-                    border: "none",
-                    borderColor: "transparent",
-                    boxShadow: "none",
-                    "&:hover": {
-                        border: "none",
-                        borderColor: "transparent"
-                    },
-                    
-                }),
-                indicatorSeparator: () => ({
-                    display: "none"
-                }),
-                menu: (base) => ({
-                    ...base,
-                    width: "20rem"
-                }),
-                menuList: (base) => ({
-                    ...base,
-                    // eigentlich scrollbar styling aber idk wie man das macht
-                }),
-            }}
-                options={categories}
-                value={null}
-                placeholder="Kategorie"
-                isSearchable={false}
-                onChange={(option) => {
-                    const url = `collections/category/${option?.value}`
+        <Menu menuButton={<p className={styles.menu}>Nach Kategorie</p>}>
+            {categories.map((category) =>
+                <MenuItem 
+                className={styles.menuItem}
+                value={category.value}
+                onClick={() => {
+                    const url = `collections?category=${category.value}`
                     navigate(url);
-                    // falls option null ist sollte für die category route einfach 404 geben?
-                }}
-            ></Select>
-
-        </div>
+                }}>{category.label}</MenuItem>
+            )}
+        </Menu>
     )
 }
 

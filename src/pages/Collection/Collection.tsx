@@ -56,9 +56,9 @@ const Collection = () => {
 
     async function handleBookmark() {
         try {
-            if (collection) {
+            if (collection && loginInfo) {
                 if (bookmark) {
-                    await deleteBookmark(collection.user.userId, collection.collectionId)
+                    await deleteBookmark(loginInfo.userId, collection.collectionId)
                     setBookmark(false)
                     addNotification({
                         id: "ioahf",
@@ -66,7 +66,7 @@ const Collection = () => {
                         message: "Bookmark removed!"
                     })
                 } else {
-                    await postBookmark(collection.user.userId, collection.collectionId)
+                    await postBookmark(loginInfo.userId, collection.collectionId)
                     setBookmark(true)
                     addNotification({
                         id: "ioahf",
@@ -90,17 +90,17 @@ const Collection = () => {
             <div className={style.header}>
                 <div className={style.title}>
                     <h1>{collection.title}</h1>
-                    <span onClick={handleBookmark}>{bookmark ? <LucideBookmark /> : <LucideBookmark fill="black" />}</span>
+                    {loginInfo && <span onClick={handleBookmark}>{bookmark ? <LucideBookmark fill="black" /> : <LucideBookmark /> }</span>}
                 </div>
                 {loginInfo && (loginInfo.userId == collection.user.userId) &&
-                    <button onClick={() => navigate(`/collection/${collectionId}/cards`)}><LucideLibraryBig /><p>Alle Karten ansehen</p></button>
+                    <Link className={style.allCards} to={`/collection/${collectionId}/cards`}><p>Alle Karten ansehen</p><LucideLibraryBig /></Link>
                 }
             </div>
 
             <div className={style.categories}>
                 {collection.categories.map((category) =>
-                    <div>
-                        <CategoryTag categoryName={category.value} />
+                    <div key={category.value}>
+                        <CategoryTag category={category} />
                     </div>
                 )}
             </div>

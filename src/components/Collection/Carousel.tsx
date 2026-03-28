@@ -25,7 +25,7 @@ const Carousel = ({collection}: Props) => {
           <div className={styles.card} key={index}>
             <Card card={card} />
           </div>
-        )) : <span><p>Noch keine Karten vorhanden!</p> <Link to={`/collection/${collection.collectionId}/cards`}>Hier eine Karte erstellen.</Link></span>}
+        )) : <span><p>Noch keine Karten vorhanden!</p> <Link to={`/collection/${collection.collectionId}/cards`} className={styles.allCards}>Hier eine Karte erstellen.</Link></span>}
       </div>
 
       {collection.cards.length !== 0 && <div className={styles.arrows}>

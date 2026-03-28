@@ -54,3 +54,13 @@
     padding: 0.5rem;
     margin-top: 0.25rem;
 }
+
+.allCards {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 1rem;
+    &:hover {
+        text-decoration: underline;
+    }
+}

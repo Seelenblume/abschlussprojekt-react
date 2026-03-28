@@ -42,9 +42,11 @@ const AllCards = () => {
             throw new Error("Keine Collection")
         }
         try {
+            console.log(id);
             await updateCard(id, front, back, notes)
             const updatedCollection = await getCardCollectionById(collection.collectionId);
             setCollection(updatedCollection);
+            setShowModal(false)
         } catch (error) {
             addNotification({
                 id: "qwetrz",
@@ -64,6 +66,7 @@ const AllCards = () => {
             console.log("handle", front)
             const updatedCollection = await getCardCollectionById(collection.collectionId);
             setCollection(updatedCollection);
+            setShowModal(false)
         } catch (error) {
             addNotification({
                 id: "qwetrz",
@@ -86,9 +89,9 @@ const AllCards = () => {
                     <CardModal
                         update
                         onModalClose={() => setShowModal(false)}
-                        onAddCard={(front, back, notes) => handleUpdateCard(selectedCard.id, front, back, notes)} />}
+                        onAddCard={(front, back, notes) => handleUpdateCard(selectedCard.cardId, front, back, notes)} />}
 
-                {collection.cardCount !== 0 ? collection.cards.map((card) =>
+                {collection.cards.length !== 0 ? collection.cards.map((card) =>
                     <>
                         <div className={styles.card}>
                             <CardSmall card={card} />

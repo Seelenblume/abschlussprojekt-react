@@ -5,8 +5,15 @@ import type { Category } from "../models/category";
 const apiUrl = import.meta.env.VITE_API_URL
 
 export async function getCollectionsBySearch(search: string) {
-
      const response = await fetch(`${apiUrl}/search?query=${search}`, {
+            method: "GET",
+            credentials: "include" as RequestCredentials
+        });
+        const loadedData: CardCollection[] = await response.json();
+        return loadedData;
+}
+export async function getCollectionsByCategory(category: string) {
+     const response = await fetch(`${apiUrl}/collection_by_category/${category}`, {
             method: "GET",
             credentials: "include" as RequestCredentials
         });
@@ -95,7 +102,7 @@ export async function postCard(
                         "Content-Type": "application/json"
                 },
                 credentials: "include" as RequestCredentials,
-                body: JSON.stringify({collectionId, front, back, notes})
+                body: JSON.stringify({collectionId, cards: [{front, back, notes}] })
         });
         
         if(!response.ok) {
@@ -109,13 +116,20 @@ export async function updateCard(
     back?: string,
     notes?: string,
 ) {
+     const body = {
+        cardId,
+        ...(front !== undefined && { front }),
+        ...(back !== undefined && { back }),
+        ...(notes !== undefined && { notes }),
+    };
+
      const response = await fetch(`${apiUrl}/card/`, {
             method: "PUT",
                 headers: {
                         "Content-Type": "application/json"
                 },
                 credentials: "include" as RequestCredentials,
-                body: JSON.stringify({cardId, front, back, notes})
+                body: JSON.stringify(body)
         });
         
         if(!response.ok) {
@@ -124,9 +138,31 @@ export async function updateCard(
 }
 
 export async function postBookmark(userId: string, collectionId: string) {
-
+     const response = await fetch(`${apiUrl}/save`, {
+            method: "POST",
+                headers: {
+                        "Content-Type": "application/json"
+                },
+                credentials: "include" as RequestCredentials,
+                body: JSON.stringify({userId, collectionId})
+        });
+        
+        if(!response.ok) {
+            throw new Error(response.status.toLocaleString())
+        }
 }
 
 export async function deleteBookmark(userId: string, collectionId: string) {
-
+    const response = await fetch(`${apiUrl}/save`, {
+            method: "DELETE",
+                headers: {
+                        "Content-Type": "application/json"
+                },
+                credentials: "include" as RequestCredentials,
+                body: JSON.stringify({userId, collectionId})
+        });
+        
+        if(!response.ok) {
+            throw new Error(response.status.toLocaleString())
+        }
 }

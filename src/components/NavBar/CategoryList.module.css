@@ -1,0 +1,11 @@
+/* https://codesandbox.io/p/sandbox/react-menu-css-module-q7zfp?file=%2Fsrc%2FApp.js%3A51%2C1-52%2C1 */
+.menu {
+    cursor: pointer;
+}
+
+.menuItem {
+  cursor: pointer;
+  padding: 0.375rem 0.625rem;
+}
+
+

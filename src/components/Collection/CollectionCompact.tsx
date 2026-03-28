@@ -1,10 +1,10 @@
 import { Link } from "react-router"
-import type { CardCollection, CardCollectionShort } from "../../models/card"
 import styles from "./CollectionCompact.module.css"
 import { LucideLibrary } from "lucide-react"
+import type { CardCollection } from "../../models/card"
 
 interface Props {
-  collection: CardCollectionShort,
+  collection: CardCollection,
 }
 
 
@@ -21,8 +21,8 @@ const CollectionCompact = ({ collection }: Props) => {
         <Link to={`/user/${collection.user.userId}`}>von {collection.user.name}</Link>
         <div className={styles.tags}>
           {collection.categories.map((category) =>
-            <div key={category.label}>
-              <p>{category.value}</p>
+            <div key={category.value}>
+              <p>{category.label}</p>
             </div>
           )}
         </div>

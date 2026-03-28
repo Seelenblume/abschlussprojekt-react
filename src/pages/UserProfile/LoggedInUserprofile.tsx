@@ -43,7 +43,7 @@ export default function LoggedInUserprofile({ user }: { user: User }) {
       </div>
 
       {showSaved ? (savedCollections && savedCollections.length !== 0 ? <CollectionGrid collections={savedCollections} /> : <p>Keine Sammlungen gespeichert</p>) :
-        (user.collections ? <CollectionGrid collections={user.collections} /> : <p>Noch keine eigenen Sammlungen</p>)}
+        (user.collections && user.collections.length !== 0 ? <CollectionGrid collections={user.collections} /> : <p>Noch keine eigenen Sammlungen</p>)}
     </div>
   )
 }
