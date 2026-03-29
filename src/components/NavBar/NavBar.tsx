@@ -47,10 +47,10 @@ const Navbar = () => {
                     </Link>
 
                     {loginInfo &&
-                    <Link to={`user/${loginInfo.userId}`}><p>My Account</p></Link>
+                    <Link to={`user/${loginInfo.userId}`}><p>Mein Konto</p></Link>
                 }
-                {loginInfo ? <p onClick={() => signOut()}>Sign Out</p>  : <Link to={"/sign-up"}>
-                        <p>Sign Up</p>
+                {loginInfo ? <p onClick={() => signOut()}>Abmelden</p>  : <Link to={"/sign-up"}>
+                        <p>Registrieren</p>
                     </Link>}
                    
                 </div>

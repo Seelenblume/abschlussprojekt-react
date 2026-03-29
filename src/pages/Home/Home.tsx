@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import CollectionGrid from "../../components/Collection/CollectionGrid"
-import { testCardCollections } from "../../test/testdata"
 import styles from "./Home.module.css"
 import { getPopularCollections } from "../../api/cardsApi"
 import type { CardCollection } from "../../models/card"

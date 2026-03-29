@@ -92,8 +92,9 @@ const Collection = () => {
                     <h1>{collection.title}</h1>
                     {loginInfo && <span onClick={handleBookmark}>{bookmark ? <LucideBookmark fill="black" /> : <LucideBookmark /> }</span>}
                 </div>
-                {loginInfo && (loginInfo.userId == collection.user.userId) &&
+                {loginInfo && (loginInfo.userId == collection.user.userId) ?
                     <Link className={style.allCards} to={`/collection/${collectionId}/cards`}><p>Alle Karten ansehen</p><LucideLibraryBig /></Link>
+                    : <p>Diese Sammlung hat noch keine Karten.</p>
                 }
             </div>
 

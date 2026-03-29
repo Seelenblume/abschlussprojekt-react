@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { CardCollection } from '../../models/card'
 import CollectionGrid from '../../components/Collection/CollectionGrid'
 import { getSavedCollectionsByUserId } from '../../api/cardsApi'

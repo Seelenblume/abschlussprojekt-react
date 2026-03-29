@@ -1,4 +1,3 @@
-import React from 'react'
 import type { CardModel } from '../../models/card'
 import styles from "./CardSmall.module.css"
 

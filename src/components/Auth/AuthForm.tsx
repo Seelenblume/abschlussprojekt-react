@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link, useNavigate } from 'react-router'
 import styles from "./Authform.module.css"
 import { useForm, type SubmitHandler } from 'react-hook-form'

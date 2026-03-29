@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router';
 import type { CardCollection } from '../../models/card';
 import { getCollectionsByCategory, getCollectionsBySearch } from '../../api/cardsApi';
