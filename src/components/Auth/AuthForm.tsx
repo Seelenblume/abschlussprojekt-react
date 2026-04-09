@@ -1,8 +1,6 @@
 import { Link, useNavigate } from 'react-router'
 import styles from "./Authform.module.css"
 import { useForm, type SubmitHandler } from 'react-hook-form'
-import { signIn, signUp } from '../../api/loginApi'
-import { useToast } from '../../context/Toast/ToastContext'
 import { useLoginContext } from '../../context/Login/LoginContext'
 
 interface Props {
@@ -18,9 +16,7 @@ type Inputs = {
 const AuthForm = ({ type }: Props) => {
 
     const navigate = useNavigate()
-
-    const { addNotification } = useToast()
-    const {setLoginInfo}  = useLoginContext()
+    const { loginInfo, signIn, signUp } = useLoginContext()
 
     const {
         register,
@@ -30,40 +26,16 @@ const AuthForm = ({ type }: Props) => {
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         if (type === "sign-in") {
-            try {
-                console.log("sign-in", data)
-                const loginInfo = await signIn(data.email, data.password)
-                setLoginInfo(loginInfo)
-                navigate("/")
-                addNotification({
-                    id: '',
-                    message: 'Signed In!',
-                    type: 'SUCCESS'
-                })
-            } catch (error) {
-                addNotification({
-                    id: '',
-                    message: 'Something went wrong!',
-                    type: 'SUCCESS'
-                })
-            }
+            console.log("sign-in", data)
+            await signIn(data.email, data.password)
+            navigate("/")
         } else {
-            try {
-                console.log("sign-up", data)
-                const loginInfo = await signUp(data.email, data.password, data.userName!)
-                setLoginInfo(loginInfo)
+            console.log("sign-up", data)
+            await signUp(data.email, data.password, data.userName!)
+            if (loginInfo) {
                 navigate(`/user/${loginInfo.userId}`)
-                addNotification({
-                    id: '',
-                    message: 'Signed In!',
-                    type: 'SUCCESS'
-                })
-            } catch (error) {
-                 addNotification({
-                    id: '',
-                    message: 'Something went wrong!',
-                    type: 'SUCCESS'
-                })
+            } else {
+                navigate("/")
             }
         }
     }

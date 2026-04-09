@@ -8,43 +8,31 @@ import Collection from './pages/Collection/Collection'
 import SignIn from './pages/Auth/SignIn'
 import SignUp from './pages/Auth/SignUp'
 import CreateCollection from './pages/CreateCollection/CreateCollection'
-import { useEffect, useState } from 'react'
-import type { LoginInfo } from './models/loginInfo'
-import { getLogin } from './api/loginApi'
+import { useEffect } from 'react'
 import AllCards from './pages/AllCards/AllCards'
-import { LoginContext } from './context/Login/LoginContext'
-import { useToast } from './context/Toast/ToastContext'
+import { useLoginContext } from './context/Login/LoginContext'
+import { LoginProvider } from './context/Login/LoginProvider'
+import ToastContainer from './components/Toast/ToastContainer'
+import { ToastProvider } from './context/Toast/ToastProvider'
 
 function App() {
 
-  const [loginInfo, setLoginInfo] = useState<LoginInfo | false>(false);
 
-  const { addNotification } = useToast()
+  const { getLogin } = useLoginContext()
 
   useEffect(() => {
-        const f = async () => {
-            try {
-                const actLogin = await getLogin();
-                setLoginInfo(actLogin);
-            } catch (err) {
-                setLoginInfo(false);
-                addNotification({
-                  id: "136",
-                  message: "Something",
-                  type: "ERROR",
-                })
-                console.log(err)
-            }
-        }
-        f();
-    }, [])
+    const f = async () => {
+      getLogin()
+    }
+    f();
+  }, [])
 
   return (
     <>
-        <LoginContext.Provider value={{
-          loginInfo: loginInfo,
-          setLoginInfo: setLoginInfo
-        }}>
+
+      <ToastProvider>
+        <ToastContainer />
+        <LoginProvider>
           <BrowserRouter>
             <Layout>
               <Routes>
@@ -59,7 +47,9 @@ function App() {
               </Routes>
             </Layout>
           </BrowserRouter>
-        </LoginContext.Provider>
+        </LoginProvider>
+
+      </ToastProvider>
     </>
   )
 }
