@@ -3,15 +3,15 @@ import { signUp as loginSignUp, signIn as loginSignIn, getLogin as getLoginInfo,
 import type { LoginInfo } from "../../models/loginInfo";
 import { useToast } from "../Toast/ToastContext";
 import { LoginContext } from "./LoginContext";
+import { v4 as uuidv4 } from 'uuid';
+
 
 interface ProviderProps {
     children: ReactNode;
 }
 
-export const LoginProvider = ({ children }: ProviderProps) => {
+export default function LoginProvider({ children }: ProviderProps) {
     const { addNotification } = useToast()
-    
-
     const [loginInfo, setLoginInfo] = useState<LoginInfo | false>(false);
 
     async function getLogin() {
@@ -28,13 +28,13 @@ export const LoginProvider = ({ children }: ProviderProps) => {
             await deleteLoginInfo();
             setLoginInfo(false)
             addNotification({
-                id: "BO",
+                id: uuidv4(),
                 message: "Abgemeldet!",
                 type: "ERROR",
             })
         } catch (error) {
             addNotification({
-                id: "BO",
+                id: uuidv4(),
                 message: "Abmeldung fehlgeschlagen!",
                 type: "ERROR",
             })
@@ -46,14 +46,14 @@ export const LoginProvider = ({ children }: ProviderProps) => {
             const data = await loginSignIn(email, password);
             setLoginInfo(data)
             addNotification({
-                    id: '',
+                    id: uuidv4(),
                     message: 'Angemeldet!',
                     type: 'SUCCESS'
             })
         } catch (error) {
             setLoginInfo(false);
             addNotification({
-                id: "nw",
+                id: uuidv4(),
                 message: "Anmeldung fehlgeschlagen!",
                 type: "ERROR",
             })
@@ -65,14 +65,14 @@ export const LoginProvider = ({ children }: ProviderProps) => {
             const data = await loginSignUp(email, password, userName);
             setLoginInfo(data)
             addNotification({
-                    id: '',
+                    id: uuidv4(),
                     message: 'Angemeldet!',
                     type: 'SUCCESS'
             })
         } catch (error) {
             setLoginInfo(false);
             addNotification({
-                id: "vsodnö",
+                id: uuidv4(),
                 message: "Registrierung fehlgeschlagen!",
                 type: "ERROR",
             })
@@ -81,7 +81,7 @@ export const LoginProvider = ({ children }: ProviderProps) => {
 
     return (
         <LoginContext.Provider value={{
-            loginInfo, setLoginInfo, getLogin, deleteLogin, signIn, signUp
+            loginInfo, getLogin, deleteLogin, signIn, signUp
         }}>
             {children}
         </LoginContext.Provider>

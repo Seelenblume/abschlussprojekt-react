@@ -9,20 +9,16 @@ import { getAllCategories } from '../../api/categoryApi';
 import { useToast } from '../../context/Toast/ToastContext';
 import { postCardCollection } from '../../api/cardsApi';
 import { useLoginContext } from '../../context/Login/LoginContext';
+import { v4 as uuidv4 } from 'uuid';
+
 
 type Inputs = {
   title: string,
   desc?: string,
-  cards: CardModel[],
   categories: Category[]
 }
 
-const CreateCollection = () => {
-
-  const navigate = useNavigate();
-  const { addNotification } = useToast()
-  const {loginInfo} = useLoginContext()
-
+export default function CreateCollection() {
   const {
     control,
     register,
@@ -36,6 +32,11 @@ const CreateCollection = () => {
     }
   })
 
+  const navigate = useNavigate();
+  const { addNotification } = useToast()
+  const {loginInfo} = useLoginContext()
+
+  
 
 
   const [categories, setCategories] = useState<Category[]>([]);
@@ -54,28 +55,22 @@ const CreateCollection = () => {
   }, [])
 
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    console.log(data)
-   
-
-
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {   
     try {
       if (!loginInfo) {
-        throw new Error("Not logged in")
+        throw new Error("Nicht eingeloggt!")
       }
       const collection = await postCardCollection(loginInfo.userId, data.title, data.desc, data.categories)
       navigate(`/collection/${collection.collectionId}`)
-
       addNotification({
-        id: `${Date.now()}nwrpgvnbwr`,
-        message: "Collection created!",
+        id: uuidv4(),
+        message: "Sammlung erstellt!",
         type: "SUCCESS"
     })
     } catch (error) {
-      console.log(error);
       addNotification({
-        id: `${Date.now()}nwrpgvnbwr`,
-        message: (error as Error).message,
+        id: uuidv4(),
+        message: "Fehler beim Erstellen der Sammlung.",
         type: "ERROR"
     })
     }
@@ -91,14 +86,14 @@ const CreateCollection = () => {
       <h2>Create a Collection</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.inputGroup}>
-          <label htmlFor='title'>Title of your collection</label>
+          <label htmlFor='title'>Titel</label>
           <input id='title' {...register("title", {
-            required: "This field is required",
+            required: "Pflichtfeld",
             maxLength: {
               value: 20,
-              message: "Maximum of 20 characters"
+              message: "Maximal 20 Zeichen"
             }
-          })} placeholder='Enter Title...' className={styles.inputLocal} />
+          })} placeholder='Titel eingeben...' className={styles.inputLocal} />
           {errors.title && <p> {errors.title.message}</p>}
         </div>
         <div className={styles.inputGroup}>
@@ -121,13 +116,9 @@ const CreateCollection = () => {
           <Controller
             control={control}
             name="categories"
-            rules={{
-              max: 5,
-            }
-            }
             render={({ field }) => (
               <Select
-                placeholder="Search for Categories..."
+                placeholder="Suche nach Kategorien..."
                 className={styles.select}
                 isMulti
                 options={categories}
@@ -151,5 +142,3 @@ const CreateCollection = () => {
     </div>
   )
 }
-
-export default CreateCollection 

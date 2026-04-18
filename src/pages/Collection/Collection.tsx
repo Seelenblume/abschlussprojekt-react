@@ -9,7 +9,7 @@ import CardModal from "../AddCard/CardModal";
 import { LucideBookmark, LucideEllipsisVertical, LucideLibraryBig, LucidePlus } from "lucide-react";
 import { useLoginContext } from "../../context/Login/LoginContext";
 import { useToast } from "../../context/Toast/ToastContext";
-
+import { v4 as uuidv4 } from 'uuid';
 
 const Collection = () => {
 
@@ -61,7 +61,7 @@ const Collection = () => {
                     await deleteBookmark(loginInfo.userId, collection.collectionId)
                     setBookmark(false)
                     addNotification({
-                        id: "ioahf",
+                        id: uuidv4(),
                         type: "SUCCESS",
                         message: "Bookmark removed!"
                     })
@@ -69,7 +69,7 @@ const Collection = () => {
                     await postBookmark(loginInfo.userId, collection.collectionId)
                     setBookmark(true)
                     addNotification({
-                        id: "ioahf",
+                        id: uuidv4(),
                         type: "SUCCESS",
                         message: "Bookmarked!"
                     })
@@ -78,7 +78,7 @@ const Collection = () => {
         } catch (error) {
             console.log(error)
             addNotification({
-                id: "ioahf",
+                id: uuidv4(),
                 type: "ERROR",
                 message: "Something went wrong!"
             })

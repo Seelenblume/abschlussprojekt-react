@@ -2,8 +2,7 @@ import { createContext, useContext } from "react";
 import type { LoginInfo } from "../../models/loginInfo";
 
 interface LoginContextType {
-    loginInfo: LoginInfo | false | undefined;
-    setLoginInfo: (loginInfo: LoginInfo | false) => void;
+    loginInfo: LoginInfo | false;
     getLogin: () => Promise<void>;
     signIn: (email: string, password: string) => Promise<void>;
     signUp: (email: string, password: string, userName: string) => Promise<void>;

@@ -5,9 +5,8 @@ import { LucidePlus } from 'lucide-react';
 import CategoryList from './CategoryList';
 import { useLoginContext } from '../../context/Login/LoginContext';
 
-const Navbar = () => {
-
-    const { loginInfo, deleteLogin } = useLoginContext();
+    export default function Navbar() {
+        const { loginInfo, deleteLogin } = useLoginContext();
     const navigate = useNavigate()
 
     async function signOut() {
@@ -41,5 +40,3 @@ const Navbar = () => {
         </header>
     )
 }
-
-export default Navbar

@@ -7,6 +7,8 @@ import CardSmall from '../../components/Card/CardSmall'
 import type { CardCollection, CardModel } from '../../models/card'
 import { LucideEdit, LucidePlus } from 'lucide-react'
 import { useToast } from '../../context/Toast/ToastContext'
+import { v4 as uuidv4 } from 'uuid';
+
 
 const AllCards = () => {
     const params = useParams();
@@ -49,7 +51,7 @@ const AllCards = () => {
             setShowModal(false)
         } catch (error) {
             addNotification({
-                id: "qwetrz",
+                id: uuidv4(),
                 message: "err",
                 type: "ERROR",
             })
@@ -69,7 +71,7 @@ const AllCards = () => {
             setShowModal(false)
         } catch (error) {
             addNotification({
-                id: "qwetrz",
+                id: uuidv4(),
                 message: "err",
                 type: "ERROR",
             })

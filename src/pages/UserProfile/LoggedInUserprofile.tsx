@@ -12,7 +12,6 @@ export default function LoggedInUserprofile({ user }: { user: User }) {
   const [showSaved, setShowSaved] = useState(false);
 
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
 
   useEffect(() => {
     async function load() {
@@ -20,8 +19,7 @@ export default function LoggedInUserprofile({ user }: { user: User }) {
         const collections = await getSavedCollectionsByUserId(user.userId)
         setSavedCollections(collections)
       } catch (error) {
-        console.log(error)
-        setError((error as Error).message)
+        
       } finally {
         setLoading(false)
       }

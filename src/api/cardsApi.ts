@@ -5,43 +5,43 @@ import type { Category } from "../models/category";
 const apiUrl = import.meta.env.VITE_API_URL
 
 export async function getCollectionsBySearch(search: string) {
-     const response = await fetch(`${apiUrl}/search?query=${search}`, {
-            method: "GET",
-            credentials: "include" as RequestCredentials
-        });
-        const loadedData: CardCollection[] = await response.json();
-        return loadedData;
+    const response = await fetch(`${apiUrl}/search?query=${search}`, {
+        method: "GET",
+        credentials: "include" as RequestCredentials
+    });
+    const loadedData: CardCollection[] = await response.json();
+    return loadedData;
 }
 export async function getCollectionsByCategory(category: string) {
-     const response = await fetch(`${apiUrl}/collection_by_category/${category}`, {
-            method: "GET",
-            credentials: "include" as RequestCredentials
-        });
-        const loadedData: CardCollection[] = await response.json();
-        return loadedData;
+    const response = await fetch(`${apiUrl}/collection_by_category/${category}`, {
+        method: "GET",
+        credentials: "include" as RequestCredentials
+    });
+    const loadedData: CardCollection[] = await response.json();
+    return loadedData;
 }
 
 export async function getPopularCollections() {
 
-     const response = await fetch(`${apiUrl}/collections/popular`, {
-            method: "GET",
-            credentials: "include" as RequestCredentials
-        });
-        const loadedData: CardCollection[] = await response.json();
-        return loadedData;
+    const response = await fetch(`${apiUrl}/collections/popular`, {
+        method: "GET",
+        credentials: "include" as RequestCredentials
+    });
+    const loadedData: CardCollection[] = await response.json();
+    return loadedData;
 
     // return testCardCollections
 }
 
 export async function getCardCollectionById(collectionId: string) {
 
-     const response = await fetch(`${apiUrl}/collection/${collectionId}`, {
-            method: "GET",
-            credentials: "include" as RequestCredentials
-        });
-        const loadedData: CardCollection = await response.json();
-        return loadedData;
-        // return testCardCollections[1]
+    const response = await fetch(`${apiUrl}/collection/${collectionId}`, {
+        method: "GET",
+        credentials: "include" as RequestCredentials
+    });
+    const loadedData: CardCollection = await response.json();
+    return loadedData;
+    // return testCardCollections[1]
 }
 
 export async function getUserCardCollectionByUserId(userId: string) {
@@ -52,19 +52,16 @@ export async function getUserCardCollectionByUserId(userId: string) {
     //     });
     //     const loadedData: CardCollection = await response.json();
     //     return loadedData;
-        return testCardCollections
+    return testCardCollections
 }
 
 export async function getSavedCollectionsByUserId(userId: string) {
-
-     const response = await fetch(`${apiUrl}/saved/${userId}`, {
-            method: "GET",
-            credentials: "include" as RequestCredentials
-        });
-        //error handling????
-        const loadedData: CardCollection[] = await response.json();
-        return loadedData;
-        // return [testCardCollections[0], testCardCollections[1]]
+    const response = await fetch(`${apiUrl}/saved/${userId}`, {
+        method: "GET",
+        credentials: "include" as RequestCredentials
+    });
+    const loadedData: CardCollection[] = await response.json();
+    return loadedData;
 }
 
 export async function postCardCollection(
@@ -73,20 +70,20 @@ export async function postCardCollection(
     description?: string,
     categories?: Category[],
 ) {
-     const response = await fetch(`${apiUrl}/collection/`, {
-            method: "POST",
-                headers: {
-                        "Content-Type": "application/json"
-                },
-                credentials: "include" as RequestCredentials,
-                body: JSON.stringify({userId, title, description, categories })
-        });
-        
-        if(!response.ok) {
-            throw new Error(response.status.toLocaleString())
-        }
-        const loadedData: CardCollection = await response.json();
-        return loadedData;
+    const response = await fetch(`${apiUrl}/collection/`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "include" as RequestCredentials,
+        body: JSON.stringify({ userId, title, description, categories })
+    });
+
+    if (!response.ok) {
+        throw new Error(response.status.toLocaleString())
+    }
+    const loadedData: CardCollection = await response.json();
+    return loadedData;
     // return `/user/1234/collection/1234`
 }
 
@@ -96,18 +93,18 @@ export async function postCard(
     back: string,
     notes: string,
 ) {
-     const response = await fetch(`${apiUrl}/card/`, {
-            method: "POST",
-                headers: {
-                        "Content-Type": "application/json"
-                },
-                credentials: "include" as RequestCredentials,
-                body: JSON.stringify({collectionId, cards: [{front, back, notes}] })
-        });
-        
-        if(!response.ok) {
-            throw new Error(response.status.toLocaleString())
-        }
+    const response = await fetch(`${apiUrl}/card/`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "include" as RequestCredentials,
+        body: JSON.stringify({ collectionId, cards: [{ front, back, notes }] })
+    });
+
+    if (!response.ok) {
+        throw new Error(response.status.toLocaleString())
+    }
 }
 
 export async function updateCard(
@@ -116,53 +113,53 @@ export async function updateCard(
     back?: string,
     notes?: string,
 ) {
-     const body = {
+    const body = {
         cardId,
         ...(front !== undefined && { front }),
         ...(back !== undefined && { back }),
         ...(notes !== undefined && { notes }),
     };
 
-     const response = await fetch(`${apiUrl}/card/`, {
-            method: "PUT",
-                headers: {
-                        "Content-Type": "application/json"
-                },
-                credentials: "include" as RequestCredentials,
-                body: JSON.stringify(body)
-        });
-        
-        if(!response.ok) {
-            throw new Error(response.status.toLocaleString())
-        }
+    const response = await fetch(`${apiUrl}/card/`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "include" as RequestCredentials,
+        body: JSON.stringify(body)
+    });
+
+    if (!response.ok) {
+        throw new Error(response.status.toLocaleString())
+    }
 }
 
 export async function postBookmark(userId: string, collectionId: string) {
-     const response = await fetch(`${apiUrl}/save`, {
-            method: "POST",
-                headers: {
-                        "Content-Type": "application/json"
-                },
-                credentials: "include" as RequestCredentials,
-                body: JSON.stringify({userId, collectionId})
-        });
-        
-        if(!response.ok) {
-            throw new Error(response.status.toLocaleString())
-        }
+    const response = await fetch(`${apiUrl}/save`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "include" as RequestCredentials,
+        body: JSON.stringify({ userId, collectionId })
+    });
+
+    if (!response.ok) {
+        throw new Error(response.status.toLocaleString())
+    }
 }
 
 export async function deleteBookmark(userId: string, collectionId: string) {
     const response = await fetch(`${apiUrl}/save`, {
-            method: "DELETE",
-                headers: {
-                        "Content-Type": "application/json"
-                },
-                credentials: "include" as RequestCredentials,
-                body: JSON.stringify({userId, collectionId})
-        });
-        
-        if(!response.ok) {
-            throw new Error(response.status.toLocaleString())
-        }
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "include" as RequestCredentials,
+        body: JSON.stringify({ userId, collectionId })
+    });
+
+    if (!response.ok) {
+        throw new Error(response.status.toLocaleString())
+    }
 }

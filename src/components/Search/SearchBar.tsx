@@ -3,7 +3,7 @@ import styles from "./SearchBar.module.css"
 import { LucideSearch } from 'lucide-react'
 import { useNavigate } from "react-router"
 
-const SearchBar = () => {
+export default function SearchBar() {
     const [searchData, setSearchData] = useState("")
 
     const navigate = useNavigate();
@@ -16,7 +16,6 @@ const SearchBar = () => {
     function onSubmit(event: React.FormEvent) {
         event.preventDefault()
         if (searchData) {
-            console.log(searchData)
             navigate(`/collections?query=${searchData}`)
         }
     }
@@ -26,7 +25,7 @@ const SearchBar = () => {
             <form onSubmit={onSubmit} className={styles.searchbar}>
                 <input
                     type="search"
-                    placeholder='Search collection...'
+                    placeholder='Sammlung suchen...'
                     onChange={handleChange}
                     value={searchData}
                 />
@@ -34,10 +33,6 @@ const SearchBar = () => {
                     <LucideSearch />
                 </button>
             </form>
-
         </div>
-
     )
 }
-
-export default SearchBar
