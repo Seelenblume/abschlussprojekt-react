@@ -12,8 +12,8 @@ export interface ToastNotification {
 
 interface ToastContextType {
     list: ToastNotification[];
-    addNotification: (notification: ToastNotification) => void;
-    removeNotification: (id: string) => void;
+    addToast: (notification: ToastNotification) => void;
+    removeToast: (id: string) => void;
 }
 
 // export const ToastContext = createContext<Props>({} as Props);

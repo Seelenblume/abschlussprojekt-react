@@ -4,7 +4,7 @@ import styles from "./ToastContainer.module.css"
 
 const ToastContainer = () => {
 
-  const {list, removeNotification} = useToast();
+  const {list, removeToast: removeNotification} = useToast();
 
   return (
     <div className={styles.container}>

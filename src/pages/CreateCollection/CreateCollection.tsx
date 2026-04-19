@@ -33,7 +33,7 @@ export default function CreateCollection() {
   })
 
   const navigate = useNavigate();
-  const { addNotification } = useToast()
+  const { addToast } = useToast()
   const {loginInfo} = useLoginContext()
 
   
@@ -62,13 +62,13 @@ export default function CreateCollection() {
       }
       const collection = await postCardCollection(loginInfo.userId, data.title, data.desc, data.categories)
       navigate(`/collection/${collection.collectionId}`)
-      addNotification({
+      addToast({
         id: uuidv4(),
         message: "Sammlung erstellt!",
         type: "SUCCESS"
     })
     } catch (error) {
-      addNotification({
+      addToast({
         id: uuidv4(),
         message: "Fehler beim Erstellen der Sammlung.",
         type: "ERROR"

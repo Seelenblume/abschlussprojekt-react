@@ -19,7 +19,7 @@ const AllCards = () => {
     const [showModal, setShowModal] = useState(false);
     const [selectedCard, setSelectedCard] = useState<CardModel | null>(null);
 
-    const {addNotification} = useToast()
+    const {addToast} = useToast()
 
     useEffect(() => {
         async function load() {
@@ -50,7 +50,7 @@ const AllCards = () => {
             setCollection(updatedCollection);
             setShowModal(false)
         } catch (error) {
-            addNotification({
+            addToast({
                 id: uuidv4(),
                 message: "err",
                 type: "ERROR",
@@ -70,7 +70,7 @@ const AllCards = () => {
             setCollection(updatedCollection);
             setShowModal(false)
         } catch (error) {
-            addNotification({
+            addToast({
                 id: uuidv4(),
                 message: "err",
                 type: "ERROR",

@@ -21,7 +21,7 @@ const Collection = () => {
 
     const [bookmark, setBookmark] = useState(false)
 
-    const { addNotification } = useToast()
+    const { addToast } = useToast()
 
     const { loginInfo, setLoginInfo } = useLoginContext();
 
@@ -60,7 +60,7 @@ const Collection = () => {
                 if (bookmark) {
                     await deleteBookmark(loginInfo.userId, collection.collectionId)
                     setBookmark(false)
-                    addNotification({
+                    addToast({
                         id: uuidv4(),
                         type: "SUCCESS",
                         message: "Bookmark removed!"
@@ -68,7 +68,7 @@ const Collection = () => {
                 } else {
                     await postBookmark(loginInfo.userId, collection.collectionId)
                     setBookmark(true)
-                    addNotification({
+                    addToast({
                         id: uuidv4(),
                         type: "SUCCESS",
                         message: "Bookmarked!"
@@ -77,7 +77,7 @@ const Collection = () => {
             }
         } catch (error) {
             console.log(error)
-            addNotification({
+            addToast({
                 id: uuidv4(),
                 type: "ERROR",
                 message: "Something went wrong!"

@@ -9,7 +9,7 @@ export const ToastProvider = ({ children }: ProviderProps) => {
 
     const [list, setList] = useState<ToastNotification[]>([]);
 
-    function addNotification(notification: ToastNotification) {
+    function addToast(notification: ToastNotification) {
         setList((prev) => [
             ...prev,
             notification,
@@ -35,8 +35,8 @@ export const ToastProvider = ({ children }: ProviderProps) => {
     return (
         <ToastContext.Provider value={{
             list,
-            addNotification,
-            removeNotification,
+            addToast,
+            removeToast: removeNotification,
         }}>
             {children}
         </ToastContext.Provider>

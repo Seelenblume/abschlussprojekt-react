@@ -11,7 +11,7 @@ interface ProviderProps {
 }
 
 export default function LoginProvider({ children }: ProviderProps) {
-    const { addNotification } = useToast()
+    const { addToast } = useToast()
     const [loginInfo, setLoginInfo] = useState<LoginInfo | false>(false);
 
     async function getLogin() {
@@ -27,13 +27,13 @@ export default function LoginProvider({ children }: ProviderProps) {
         try {
             await deleteLoginInfo();
             setLoginInfo(false)
-            addNotification({
+            addToast({
                 id: uuidv4(),
                 message: "Abgemeldet!",
                 type: "ERROR",
             })
         } catch (error) {
-            addNotification({
+            addToast({
                 id: uuidv4(),
                 message: "Abmeldung fehlgeschlagen!",
                 type: "ERROR",
@@ -45,14 +45,14 @@ export default function LoginProvider({ children }: ProviderProps) {
         try {
             const data = await loginSignIn(email, password);
             setLoginInfo(data)
-            addNotification({
+            addToast({
                     id: uuidv4(),
                     message: 'Angemeldet!',
                     type: 'SUCCESS'
             })
         } catch (error) {
             setLoginInfo(false);
-            addNotification({
+            addToast({
                 id: uuidv4(),
                 message: "Anmeldung fehlgeschlagen!",
                 type: "ERROR",
@@ -64,14 +64,14 @@ export default function LoginProvider({ children }: ProviderProps) {
         try {
             const data = await loginSignUp(email, password, userName);
             setLoginInfo(data)
-            addNotification({
+            addToast({
                     id: uuidv4(),
                     message: 'Angemeldet!',
                     type: 'SUCCESS'
             })
         } catch (error) {
             setLoginInfo(false);
-            addNotification({
+            addToast({
                 id: uuidv4(),
                 message: "Registrierung fehlgeschlagen!",
                 type: "ERROR",
