@@ -45,18 +45,18 @@ const AuthForm = ({ type }: Props) => {
 
 
             <form onSubmit={handleSubmit(onSubmit)}>
-                <h2>{type === "sign-in" ? "Sign In" : "Sign Up"}</h2>
+                <h2>{type === "sign-in" ? "Anmelden" : "Registrieren"}</h2>
                 <div>
                     {type === "sign-up" &&
                         <div className={styles.inputGroup}>
-                            <label htmlFor='username'>User name</label>
+                            <label htmlFor='username'>User Name</label>
                             <input className={`${errors.userName && styles.inputError}`} {...register("userName", {
-                                required: "This field is required",
+                                required: "Pflichtfeld",
                                 maxLength: {
                                     value: 20,
-                                    message: "Maximum of 20 characters"
+                                    message: "MMaximal 20 Zeichen"
                                 }
-                            })} placeholder='user name' id='username' />
+                            })} placeholder='User Name eingeben...' id='username' />
                             {errors.userName && <span className={styles.errorMessage}>{errors.userName.message}</span>}
                         </div>
                     }
@@ -66,38 +66,38 @@ const AuthForm = ({ type }: Props) => {
                     <div className={styles.inputGroup}>
                         <label htmlFor='email'>E-Mail</label>
                         <input {...register("email", {
-                            required: "This field is required",
+                            required: "Pflichtfeld",
                             pattern: {
                                 // https://react-hook-form.com/advanced-usage
                                 value: /\S+@\S+\.\S+/,
-                                message: "Entered value does not match email format",
+                                message: "Eingabe muss eine gültige E-Mail sein",
                             },
-                        })} placeholder='E-mail' id='email' />
+                        })} placeholder='E-Mail eingeben...' id='email' />
                         {errors.email && <span className={styles.errorMessage}>{errors.email.message}</span>}
                     </div>
 
 
                     <div className={styles.inputGroup}>
-                        <label htmlFor='password'>Password</label>
+                        <label htmlFor='password'>Passwort</label>
                         <input type='password' {...register("password", {
-                            required: "This field is required",
+                            required: "Pflichtfeld",
                             maxLength: {
                                 value: 50,
-                                message: "Maximum of 50 characters"
+                                message: "Maximal 50 Zeichen"
                             }
-                        })} placeholder='password' />
+                        })} placeholder='Passwort eingeben...' />
 
                         {errors.password && <span className={styles.errorMessage}>{errors.password.message}</span>}
                     </div>
                 </div>
 
                 {type === "sign-in"
-                    ? <p>No account yet? <Link to="/sign-up?redirect=home">Sign Up</Link></p>
-                    : <p>Already have an account? <Link to="/sign-in?redirect=home">Sign In</Link></p>
+                    ? <p>Noch kein Konto? <Link to="/sign-up?redirect=home">Hier registrieren</Link></p>
+                    : <p>Du hast schon ein Konto? <Link to="/sign-in?redirect=home">Hier anmelden</Link></p>
                 }
 
 
-                <button type='submit'>Submit</button>
+                <button type='submit'>{type === "sign-in" ? "Anmelden" : "Registrieren"}</button>
             </form>
         </div>
     )

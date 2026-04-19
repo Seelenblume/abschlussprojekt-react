@@ -109,16 +109,12 @@ export async function postCard(
 
 export async function updateCard(
     cardId: string,
-    front?: string,
-    back?: string,
-    notes?: string,
+    changes: {
+      front?: string,
+      back?: string,
+      notes?: string,
+    }
 ) {
-    const body = {
-        cardId,
-        ...(front !== undefined && { front }),
-        ...(back !== undefined && { back }),
-        ...(notes !== undefined && { notes }),
-    };
 
     const response = await fetch(`${apiUrl}/card/`, {
         method: "PUT",
@@ -126,7 +122,8 @@ export async function updateCard(
             "Content-Type": "application/json"
         },
         credentials: "include" as RequestCredentials,
-        body: JSON.stringify(body)
+        body: JSON.stringify({ cardId, ...changes }),
+
     });
 
     if (!response.ok) {
