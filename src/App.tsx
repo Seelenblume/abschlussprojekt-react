@@ -12,7 +12,7 @@ import { useEffect } from 'react'
 import AllCards from './pages/AllCards/AllCards'
 import { useLoginContext } from './context/Login/LoginContext'
 
-function App() {
+export default function App() {
   const { getLogin } = useLoginContext()
 
   useEffect(() => {
@@ -24,24 +24,20 @@ function App() {
 
   return (
     <>
-
-     
-          <BrowserRouter>
-            <Layout>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/user/:userId" element={<UserProfile />} />
-                <Route path="/collections" element={<Collections />} />
-                <Route path="/collection/:collectionId" element={<Collection />} />
-                <Route path="/collection/:collectionId/cards" element={<AllCards />} />
-                <Route path="/collection/create" element={<CreateCollection />} />
-                <Route path="/sign-in" element={<SignIn />} />
-                <Route path="/sign-up" element={<SignUp />} />
-              </Routes>
-            </Layout>
-          </BrowserRouter>
+      <BrowserRouter>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/user/:userId" element={<UserProfile />} />
+            <Route path="/collections" element={<Collections />} />
+            <Route path="/collection/:collectionId" element={<Collection />} />
+            <Route path="/collection/:collectionId/cards" element={<AllCards />} />
+            <Route path="/collection/create" element={<CreateCollection />} />
+            <Route path="/sign-in" element={<SignIn />} />
+            <Route path="/sign-up" element={<SignUp />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
     </>
   )
 }
-
-export default App

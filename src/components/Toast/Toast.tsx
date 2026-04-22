@@ -10,7 +10,7 @@ interface ToastProps {
   removeNotification: () => void
 }
 
-const Toast = (props: ToastProps) => {
+export default function Toast(props: ToastProps) {
     const type = props.type
   return (
     <div key={props.id} className={clsx(styles.toast, 
@@ -23,5 +23,3 @@ const Toast = (props: ToastProps) => {
     </div>
   )
 }
-
-export default Toast

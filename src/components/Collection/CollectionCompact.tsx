@@ -8,7 +8,7 @@ interface Props {
 }
 
 
-const CollectionCompact = ({ collection }: Props) => {
+export default function CollectionCompact({ collection }: Props) {
 
   return (
     <Link className={styles.compact} to={`/collection/${collection.collectionId}`}>
@@ -31,5 +31,3 @@ const CollectionCompact = ({ collection }: Props) => {
     </Link>
   )
 }
-
-export default CollectionCompact

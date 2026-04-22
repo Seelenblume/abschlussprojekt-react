@@ -4,7 +4,7 @@ import styles from "./Home.module.css"
 import { getPopularCollections } from "../../api/cardsApi"
 import type { CardCollection } from "../../models/card"
 
-const Home = () => {
+export default function Home() {
 
   const [collections, setCollections] = useState<CardCollection[] | null>(null);
 
@@ -33,5 +33,3 @@ const Home = () => {
     </div>
   )
 }
-
-export default Home

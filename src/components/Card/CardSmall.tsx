@@ -5,7 +5,7 @@ interface Props {
     card: CardModel
 }
 
-const CardSmall = (props: Props) => {
+export default function CardSmall(props: Props) {
   return (
     <div className={styles.cardSmall}>
         <p>Vorderseite: {props.card.front}</p>
@@ -13,5 +13,3 @@ const CardSmall = (props: Props) => {
     </div>
   )
 }
-
-export default CardSmall

@@ -1,14 +1,14 @@
 import React from 'react'
 import CollectionCompact from './CollectionCompact'
-import type { CardCollection, CardCollectionShort } from '../../models/card'
+import type { CardCollection } from '../../models/card'
 
 import styles from "./CollectionGrid.module.css"
 
 interface Props {
-    collections: CardCollectionShort[],
+    collections: CardCollection[],
 }
 
-const CollectionGrid = ({ collections }: Props) => {
+export default function CollectionGrid({ collections }: Props) {
     return (
         <div className={styles.grid}>
             {collections.map((collection) =>
@@ -19,5 +19,3 @@ const CollectionGrid = ({ collections }: Props) => {
         </div>
     )
 }
-
-export default CollectionGrid

@@ -10,7 +10,7 @@ import LoggedInUserprofile from './LoggedInUserprofile';
 import ProfileBanner from '../../components/Profile/ProfileBanner';
 import { useLoginContext } from '../../context/Login/LoginContext';
 
-const UserProfile = () => {
+export default function UserProfile() {
   const params = useParams();
   const userId = params.userId
 
@@ -67,5 +67,3 @@ const UserProfile = () => {
 
   )
 }
-
-export default UserProfile

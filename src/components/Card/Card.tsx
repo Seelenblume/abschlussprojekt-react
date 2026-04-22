@@ -7,7 +7,7 @@ interface Props {
   card: CardModel,
 }
 
-const Card = ({ card }: Props) => {
+export default function Card({ card }: Props) {
 
   const [showBack, setShowBack] = useState(false);
 
@@ -31,5 +31,3 @@ const Card = ({ card }: Props) => {
 
   )
 }
-
-export default Card

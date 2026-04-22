@@ -10,7 +10,7 @@ import { useLoginContext } from "../../context/Login/LoginContext";
 import { useToast } from "../../context/Toast/ToastContext";
 import { v4 as uuidv4 } from 'uuid';
 
-const Collection = () => {
+export default function Collection() {
 
     const params = useParams()
     const collectionId = params.collectionId;
@@ -125,5 +125,3 @@ const Collection = () => {
         </div>
     )
 }
-
-export default Collection

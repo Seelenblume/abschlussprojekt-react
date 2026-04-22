@@ -7,7 +7,7 @@ import "@szhsin/react-menu/dist/core.css";
 import styles from "./CategoryList.module.css"
 
 
-const CategoryList = () => {
+export default function CategoryList() {
 
     const [categories, setCategories] = useState<Category[]>([])
     
@@ -40,5 +40,3 @@ const CategoryList = () => {
         </Menu>
     )
 }
-
-export default CategoryList

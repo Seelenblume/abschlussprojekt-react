@@ -10,7 +10,7 @@ import { useToast } from '../../context/Toast/ToastContext'
 import { v4 as uuidv4 } from 'uuid';
 
 
-const AllCards = () => {
+export default function AllCards() {
     const params = useParams();
     const collectionId = params.collectionId
 
@@ -111,5 +111,3 @@ const AllCards = () => {
         </div>
     )
 }
-
-export default AllCards

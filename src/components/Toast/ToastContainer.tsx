@@ -2,7 +2,7 @@ import { useToast } from '../../context/Toast/ToastContext';
 import Toast from './Toast';
 import styles from "./ToastContainer.module.css"
 
-const ToastContainer = () => {
+export default function ToastContainer() {
 
   const {list, removeToast: removeNotification} = useToast();
 
@@ -21,5 +21,3 @@ const ToastContainer = () => {
     </div>
   )
 }
-
-export default ToastContainer

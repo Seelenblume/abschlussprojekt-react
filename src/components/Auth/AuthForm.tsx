@@ -13,7 +13,7 @@ type Inputs = {
     password: string,
 }
 
-const AuthForm = ({ type }: Props) => {
+export default function AuthForm({ type }: Props) {
 
     const navigate = useNavigate()
     const { loginInfo, signIn, signUp } = useLoginContext()
@@ -102,5 +102,3 @@ const AuthForm = ({ type }: Props) => {
         </div>
     )
 }
-
-export default AuthForm

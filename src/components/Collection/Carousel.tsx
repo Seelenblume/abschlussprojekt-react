@@ -11,7 +11,7 @@ interface Props {
 }
  
 
-const Carousel = ({collection}: Props) => {
+export default function Carousel({collection}: Props) {
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const { loginInfo } = useLoginContext()
@@ -37,5 +37,3 @@ const Carousel = ({collection}: Props) => {
     </div>
     )
 }
-
-export default Carousel

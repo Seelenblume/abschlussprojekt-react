@@ -4,7 +4,7 @@ import type { CardCollection } from '../../models/card';
 import { getCollectionsByCategory, getCollectionsBySearch } from '../../api/cardsApi';
 import CollectionGrid from '../../components/Collection/CollectionGrid';
 
-const Collections = () => {
+export default function Collections() {
 
     const [searchParams] = useSearchParams();
     const query = searchParams.get("query");
@@ -47,5 +47,3 @@ const Collections = () => {
         </div>
     )
 }
-
-export default Collections
