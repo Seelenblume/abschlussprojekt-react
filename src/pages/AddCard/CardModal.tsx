@@ -44,34 +44,35 @@ export default function CardModal({ onModalClose, onAddCard, update }: {
                     <div className={styles.actions}>
                         <div className={styles.inputGroup}>
 
-                            <label>Front</label>
-                            <input {...register("front", {
-                                required: !update ? "This field is required" : false,
+                            <label>Vorderseite</label>
+                            <input placeholder="Inhalt eingeben..." {...register("front", {
+                                required: !update ? "Pflichtfeld" : false,
                             })} />
-                            {errors.front && <span>{errors.front.message}</span>}
+                            {errors.front && <span className={styles.errorMessage}>{errors.front.message}</span>}
                         </div>
 
                         <div className={styles.inputGroup}>
 
-                            <label>Back</label>
-                            <input {...register("back", {
-                                required: !update ? "This field is required" : false,
+                            <label>Rückseite</label>
+                           <input placeholder="Inhalt eingeben..." {...register("back", {
+                                required: !update ? "Pflichtfeld" : false,
                             })} />
-                            {errors.back && <span>{errors.back.message}</span>}
+                            {errors.back && <span className={styles.errorMessage}>{errors.back.message}</span>}
 
                         </div>
 
                     </div>
 
                     <div>
-                        <label>Notes (optional)</label>
-                        <textarea className={styles.textarea} {...register("notes", {
-                            required: false
+                        <label>Notizen</label>
+                        <textarea className={styles.textarea} placeholder="Notizen eingeben..." {...register("notes", {
+                            required: !update ? "Pflichtfeld" : false,
                         })} />
+                        {errors.notes && <span className={styles.errorMessage}>{errors.notes.message}</span>}
                     </div>
                     <div>
                         <button type="submit">
-                            Hinzufügen
+                            {update ? <span>Aktualisieren</span> : <span>Hinzufügen</span>}
                         </button>
                         <button onClick={onModalClose}>
                             Abbrechen

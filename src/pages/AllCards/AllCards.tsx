@@ -19,7 +19,7 @@ const AllCards = () => {
     const [showModal, setShowModal] = useState(false);
     const [selectedCard, setSelectedCard] = useState<CardModel | null>(null);
 
-    const {addToast} = useToast()
+    const { addToast } = useToast()
 
     useEffect(() => {
         async function load() {
@@ -40,19 +40,19 @@ const AllCards = () => {
     }
 
     async function handleUpdateCard(id: string, front?: string, back?: string, notes?: string) {
-        if (!collection) {
-            throw new Error("Keine Collection")
-        }
         try {
+            if (!collection) {
+                throw new Error("Keine Collection")
+            }
             console.log(id);
-            await updateCard(id, front, back, notes)
+            await updateCard(id, { front, back, notes })
             const updatedCollection = await getCardCollectionById(collection.collectionId);
             setCollection(updatedCollection);
             setShowModal(false)
         } catch (error) {
             addToast({
                 id: uuidv4(),
-                message: "err",
+                message: "Aktualisieren fehlgeschlagen!",
                 type: "ERROR",
             })
             console.log(error)
@@ -60,10 +60,10 @@ const AllCards = () => {
     }
 
     async function handleAddCard(front: string, back: string, notes: string) {
-        if (!collection) {
-            throw new Error("Keine Collection")
-        }
         try {
+            if (!collection) {
+                throw new Error("Keine Collection")
+            }
             await postCard(collection.collectionId, front, back, notes);
             console.log("handle", front)
             const updatedCollection = await getCardCollectionById(collection.collectionId);
@@ -72,7 +72,7 @@ const AllCards = () => {
         } catch (error) {
             addToast({
                 id: uuidv4(),
-                message: "err",
+                message: "Hinzufügen fehlgeschlagen!",
                 type: "ERROR",
             })
             console.log(error)
@@ -81,7 +81,7 @@ const AllCards = () => {
 
     return (
         <div >
-            <button className={styles.addCard} onClick={() => {setShowModal(true)}}>
+            <button className={styles.addCard} onClick={() => { setShowModal(true) }}>
                 <LucidePlus />
             </button>
             {showModal && <CardModal onModalClose={() => setShowModal(false)}
@@ -102,7 +102,7 @@ const AllCards = () => {
                                 <button onClick={() => {
                                     setSelectedCard(card)
                                     setShowModal(true)
-                                }}><LucideEdit/></button>
+                                }}><LucideEdit /></button>
                             </div>
                         </div>
                     </>

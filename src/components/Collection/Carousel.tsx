@@ -4,6 +4,7 @@ import type { CardCollection } from '../../models/card';
 import Card from "../Card/Card"
 import styles from "./Carousel.module.css"
 import { Link } from 'react-router';
+import { useLoginContext } from '../../context/Login/LoginContext';
 
 interface Props {
     collection: CardCollection,
@@ -12,7 +13,8 @@ interface Props {
 
 const Carousel = ({collection}: Props) => {
 
-        const [currentIndex, setCurrentIndex] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const { loginInfo } = useLoginContext()
 
 
     return (
@@ -25,7 +27,7 @@ const Carousel = ({collection}: Props) => {
           <div className={styles.card} key={index}>
             <Card card={card} />
           </div>
-        )) : <span><p>Noch keine Karten vorhanden!</p> <Link to={`/collection/${collection.collectionId}/cards`} className={styles.allCards}>Hier eine Karte erstellen.</Link></span>}
+        )) : <span>{loginInfo ? <span><p>Noch keine Karten vorhanden!</p> <Link to={`/collection/${collection.collectionId}/cards`} className={styles.allCards}>Hier eine Karte erstellen.</Link></span> : <p>Diese Sammlung hat noch keine Karten.</p>}</span>}
       </div>
 
       {collection.cards.length !== 0 && <div className={styles.arrows}>

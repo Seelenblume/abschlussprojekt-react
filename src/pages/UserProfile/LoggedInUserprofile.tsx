@@ -40,8 +40,8 @@ export default function LoggedInUserprofile({ user }: { user: User }) {
         <span className={`${showSaved && styles.show}`} onClick={() => setShowSaved(true)}>Meine gespeicherten Sammlungen</span>
       </div>
 
-      {showSaved ? (savedCollections && savedCollections.length !== 0 ? <CollectionGrid collections={savedCollections} /> : <p>Keine Sammlungen gespeichert</p>) :
-        (user.collections && user.collections.length !== 0 ? <CollectionGrid collections={user.collections} /> : <p>Noch keine eigenen Sammlungen</p>)}
+      {showSaved ? (savedCollections && savedCollections.length !== 0 ? <CollectionGrid collections={savedCollections} /> : <p>Keine Sammlungen gespeichert.</p>) :
+        (user.collections && user.collections.length !== 0 ? <CollectionGrid collections={user.collections} /> : <p>Noch keine eigenen Sammlungen.</p>)}
     </div>
   )
 }

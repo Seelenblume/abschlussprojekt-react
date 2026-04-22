@@ -70,7 +70,8 @@ export async function postCardCollection(
     description?: string,
     categories?: Category[],
 ) {
-    const response = await fetch(`${apiUrl}/collection/`, {
+    console.log(userId)
+    const response = await fetch(`${apiUrl}/collection`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -93,7 +94,7 @@ export async function postCard(
     back: string,
     notes: string,
 ) {
-    const response = await fetch(`${apiUrl}/card/`, {
+    const response = await fetch(`${apiUrl}/card`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -116,7 +117,7 @@ export async function updateCard(
     }
 ) {
 
-    const response = await fetch(`${apiUrl}/card/`, {
+    const response = await fetch(`${apiUrl}/card`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
@@ -147,7 +148,7 @@ export async function postBookmark(userId: string, collectionId: string) {
 }
 
 export async function deleteBookmark(userId: string, collectionId: string) {
-    const response = await fetch(`${apiUrl}/save`, {
+    const response = await fetch(`${apiUrl}/saved`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"

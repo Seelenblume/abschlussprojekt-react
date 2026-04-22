@@ -1,12 +1,11 @@
-import { useEffect, useRef, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router"
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router"
 import type { CardCollection } from "../../models/card";
-import { deleteBookmark, getCardCollectionById, postBookmark, postCard } from "../../api/cardsApi";
+import { deleteBookmark, getCardCollectionById, postBookmark } from "../../api/cardsApi";
 import style from "./Collection.module.css"
 import Carousel from "../../components/Collection/Carousel";
 import CategoryTag from "../../components/Categories/CategoryTag";
-import CardModal from "../AddCard/CardModal";
-import { LucideBookmark, LucideEllipsisVertical, LucideLibraryBig, LucidePlus } from "lucide-react";
+import { LucideBookmark, LucideLibraryBig } from "lucide-react";
 import { useLoginContext } from "../../context/Login/LoginContext";
 import { useToast } from "../../context/Toast/ToastContext";
 import { v4 as uuidv4 } from 'uuid';
@@ -23,9 +22,9 @@ const Collection = () => {
 
     const { addToast } = useToast()
 
-    const { loginInfo, setLoginInfo } = useLoginContext();
+    const { loginInfo } = useLoginContext();
 
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
 
     useEffect(() => {
@@ -63,7 +62,7 @@ const Collection = () => {
                     addToast({
                         id: uuidv4(),
                         type: "SUCCESS",
-                        message: "Bookmark removed!"
+                        message: "Entfernt!"
                     })
                 } else {
                     await postBookmark(loginInfo.userId, collection.collectionId)
@@ -71,7 +70,7 @@ const Collection = () => {
                     addToast({
                         id: uuidv4(),
                         type: "SUCCESS",
-                        message: "Bookmarked!"
+                        message: "Gespeichert!"
                     })
                 }
             }
@@ -80,7 +79,7 @@ const Collection = () => {
             addToast({
                 id: uuidv4(),
                 type: "ERROR",
-                message: "Something went wrong!"
+                message: "Etwas ist schief gelaufen!"
             })
         }
     }
@@ -92,9 +91,12 @@ const Collection = () => {
                     <h1>{collection.title}</h1>
                     {loginInfo && <span onClick={handleBookmark}>{bookmark ? <LucideBookmark fill="black" /> : <LucideBookmark /> }</span>}
                 </div>
-                {loginInfo && (loginInfo.userId == collection.user.userId) ?
-                    <Link className={style.allCards} to={`/collection/${collectionId}/cards`}><p>Alle Karten ansehen</p><LucideLibraryBig /></Link>
-                    : <p>Diese Sammlung hat noch keine Karten.</p>
+                {loginInfo && (loginInfo.userId == collection.user.userId) &&
+                    <span>{collection.cards.length !== 0 ? 
+                    <Link className={style.allCards} to={`/collection/${collectionId}/cards`}>
+                        <p>Alle Karten ansehen</p><LucideLibraryBig /></Link> 
+                        : <p>Diese Sammlung hat noch keine Karten.</p> }
+                        </span>
                 }
             </div>
 
@@ -111,7 +113,7 @@ const Collection = () => {
                 <div className={style.profile}>
                     <h3>Ersteller</h3>
                     <div className={style.name}>
-                        <img src="../src/assets/react.svg" />
+                        <img src="../src/assets/profile_pic.svg" />
                         <Link to={`/user/${collection.user.userId}`}>{collection.user.name}</Link>
                     </div>
                 </div>

@@ -15,11 +15,10 @@ const UserProfile = () => {
   const userId = params.userId
 
   const [user, setUser] = useState<User | null>(null);
-  // const [collections, setCollections] = useState<CardCollection[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const { loginInfo, setLoginInfo } = useLoginContext();
+  const { loginInfo } = useLoginContext();
 
   useEffect(() => {
     async function loadUser() {
@@ -59,7 +58,7 @@ const UserProfile = () => {
           <ProfileBanner username={user.name} />
           <div className={styles.collections}>
             <h2>Sammlungen</h2>
-            {user.collections && user.collections.length !== 0 ? <CollectionGrid collections={user.collections} /> : <p>Dieser User hat keine Sammlungen</p>}
+            {user.collections && user.collections.length !== 0 ? <CollectionGrid collections={user.collections} /> : <p>Dieser User hat keine Sammlungen.</p>}
           </div>
 
         </div>}

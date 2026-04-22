@@ -5,7 +5,7 @@ export default function ProfileBanner({username}: {username: string}) {
        <div className={styles.banner}>
         <div className={styles.gradient} />
         <div className={styles.info}>
-          <img src="../src/assets/react.svg" className={styles.profilePic} />
+          <img src="../src/assets/profile_pic.svg" className={styles.profilePic} />
           <h1>{username}</h1>
         </div>
 

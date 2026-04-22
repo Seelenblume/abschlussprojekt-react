@@ -16,7 +16,6 @@ const Collections = () => {
 
     useEffect(() => {
     async function load() {
-        setLoading(true);
         try {
             let result: CardCollection[] = [];
 

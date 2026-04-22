@@ -5,8 +5,8 @@ import { LucidePlus } from 'lucide-react';
 import CategoryList from './CategoryList';
 import { useLoginContext } from '../../context/Login/LoginContext';
 
-    export default function Navbar() {
-        const { loginInfo, deleteLogin } = useLoginContext();
+export default function Navbar() {
+    const { loginInfo, deleteLogin } = useLoginContext();
     const navigate = useNavigate()
 
     async function signOut() {
@@ -18,7 +18,7 @@ import { useLoginContext } from '../../context/Login/LoginContext';
         <header className={styles.header}>
             <nav className={styles.nav}>
                 <Link to="/">
-                    <img src="/logo.png" alt='logo' />
+                    <p>Studylet</p>
                 </Link>
                 <CategoryList />
                 <SearchBar />

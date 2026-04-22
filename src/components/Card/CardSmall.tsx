@@ -8,8 +8,8 @@ interface Props {
 const CardSmall = (props: Props) => {
   return (
     <div className={styles.cardSmall}>
-        <p>Front: {props.card.front}</p>
-        <p>Back: {props.card.back}</p>
+        <p>Vorderseite: {props.card.front}</p>
+        <p>Rückseite: {props.card.back}</p>
     </div>
   )
 }

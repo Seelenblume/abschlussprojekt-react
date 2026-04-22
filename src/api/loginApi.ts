@@ -53,6 +53,7 @@ export async function signIn(email: string, password: string,) {
         if (response.ok) {
                 const loginInfo: LoginInfo = await response.json();
                 //     const loginInfo = await response.json();
+                console.log("inner signin", loginInfo)
                 return loginInfo;
         }
 

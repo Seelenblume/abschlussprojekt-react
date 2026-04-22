@@ -11,9 +11,6 @@ import CreateCollection from './pages/CreateCollection/CreateCollection'
 import { useEffect } from 'react'
 import AllCards from './pages/AllCards/AllCards'
 import { useLoginContext } from './context/Login/LoginContext'
-import ToastContainer from './components/Toast/ToastContainer'
-import { ToastProvider } from './context/Toast/ToastProvider'
-import LoginProvider from './context/Login/LoginProvider'
 
 function App() {
   const { getLogin } = useLoginContext()
@@ -28,9 +25,7 @@ function App() {
   return (
     <>
 
-      <ToastProvider>
-        <ToastContainer />
-        <LoginProvider>
+     
           <BrowserRouter>
             <Layout>
               <Routes>
@@ -45,9 +40,6 @@ function App() {
               </Routes>
             </Layout>
           </BrowserRouter>
-        </LoginProvider>
-
-      </ToastProvider>
     </>
   )
 }

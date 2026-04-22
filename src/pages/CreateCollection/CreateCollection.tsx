@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router';
 import styles from "./CreateCollection.module.css"
-import type { CardModel } from '../../models/card';
 import { Controller, useForm, type SubmitHandler } from 'react-hook-form';
 import type { Category } from '../../models/category';
 import Select from 'react-select';
@@ -83,7 +82,7 @@ export default function CreateCollection() {
 
   return (
     <div className={styles.whole}>
-      <h2>Create a Collection</h2>
+      <h2>Sammlung erstellen</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.inputGroup}>
           <label htmlFor='title'>Titel</label>
@@ -97,14 +96,14 @@ export default function CreateCollection() {
           {errors.title && <p> {errors.title.message}</p>}
         </div>
         <div className={styles.inputGroup}>
-          <label htmlFor='desc'>Description</label>
+          <label htmlFor='desc'>Beschreibung</label>
           <textarea id='desc' {...register("desc", {
             maxLength: {
               value: 200,
-              message: "Maximum of 200 characters"
+              message: "Maximal 200 Zeichen"
             }
           })
-          } className={styles.textarea} />
+          }placeholder='Beschreibung eingeben...' className={styles.textarea} />
           {errors.desc && <p>errors.desc.message</p>}
 
         </div>
@@ -112,7 +111,7 @@ export default function CreateCollection() {
 
 
         <div className={styles.inputGroup}>
-          <label htmlFor='category'>Categories</label>
+          <label htmlFor='category'>Kategorien auswählen</label>
           <Controller
             control={control}
             name="categories"
