@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import type { User } from '../../models/user';
 import { getUserById } from '../../api/userApi';
-import type { CardCollection } from '../../models/card';
-import { getUserCardCollectionByUserId } from '../../api/cardsApi';
 import CollectionGrid from '../../components/Collection/CollectionGrid';
 import styles from "./UserProfile.module.css"
 import LoggedInUserprofile from './LoggedInUserprofile';
@@ -16,7 +14,6 @@ export default function UserProfile() {
 
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
 
   const { loginInfo } = useLoginContext();
 
@@ -27,7 +24,7 @@ export default function UserProfile() {
         const result = await getUserById(userId);
         setUser(result);
       } catch (error) {
-        setError((error as Error).message)
+        console.log(error)
       } finally {
         setLoading(false)
       }
@@ -42,10 +39,6 @@ export default function UserProfile() {
 
   if (!user) {
     return
-  }
-
-  if (error) {
-    return <p>{error}</p>
   }
 
   return (

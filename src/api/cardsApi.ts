@@ -29,8 +29,6 @@ export async function getPopularCollections() {
     });
     const loadedData: CardCollection[] = await response.json();
     return loadedData;
-
-    // return testCardCollections
 }
 
 export async function getCardCollectionById(collectionId: string) {
@@ -41,18 +39,6 @@ export async function getCardCollectionById(collectionId: string) {
     });
     const loadedData: CardCollection = await response.json();
     return loadedData;
-    // return testCardCollections[1]
-}
-
-export async function getUserCardCollectionByUserId(userId: string) {
-
-    //  const response = await fetch(`${apiUrl}/collection/${collectionId}`, {
-    //         method: "GET",
-    //         credentials: "include" as RequestCredentials
-    //     });
-    //     const loadedData: CardCollection = await response.json();
-    //     return loadedData;
-    return testCardCollections
 }
 
 export async function getSavedCollectionsByUserId(userId: string) {
@@ -70,7 +56,6 @@ export async function postCardCollection(
     description?: string,
     categories?: Category[],
 ) {
-    console.log(userId)
     const response = await fetch(`${apiUrl}/collection`, {
         method: "POST",
         headers: {
@@ -85,7 +70,6 @@ export async function postCardCollection(
     }
     const loadedData: CardCollection = await response.json();
     return loadedData;
-    // return `/user/1234/collection/1234`
 }
 
 export async function postCard(

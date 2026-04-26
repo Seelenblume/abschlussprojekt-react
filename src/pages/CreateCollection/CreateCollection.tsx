@@ -47,7 +47,6 @@ export default function CreateCollection() {
         setCategories(cat)
       } catch (error) {
         // just keep it empty...
-        // console.log(error)
       }
     }
     load()

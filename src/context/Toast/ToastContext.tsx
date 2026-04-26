@@ -16,11 +16,6 @@ interface ToastContextType {
     removeToast: (id: string) => void;
 }
 
-// export const ToastContext = createContext<Props>({} as Props);
-
-// export const useToast = (): Props => useContext(ToastContext);
-
-
 export const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
 export const useToast = (): ToastContextType => {

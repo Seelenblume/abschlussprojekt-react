@@ -24,9 +24,6 @@ export default function Collection() {
 
     const { loginInfo } = useLoginContext();
 
-    // const navigate = useNavigate()
-
-
     useEffect(() => {
         async function load() {
             if (collectionId) {
@@ -43,7 +40,6 @@ export default function Collection() {
         }
         load()
     }, [collectionId])
-
 
     if (loading) {
         return <p>Loading...</p>

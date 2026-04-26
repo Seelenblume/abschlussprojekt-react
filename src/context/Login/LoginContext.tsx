@@ -13,5 +13,3 @@ export const LoginContext = createContext<LoginContextType>({} as LoginContextTy
 
 
 export const useLoginContext = () => useContext(LoginContext);
-
-// einen custom context provider schreiben fürs anmelden ?

@@ -26,11 +26,9 @@ export default function AuthForm({ type }: Props) {
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         if (type === "sign-in") {
-            console.log("sign-in", data)
             await signIn(data.email, data.password)
             navigate("/")
         } else {
-            console.log("sign-up", data)
             await signUp(data.email, data.password, data.userName!)
             if (loginInfo) {
                 navigate(`/user/${loginInfo.userId}`)

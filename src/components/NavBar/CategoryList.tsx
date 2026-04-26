@@ -20,7 +20,6 @@ export default function CategoryList() {
                 setCategories(cat)
             } catch (error) {
                 // just keep it empty...
-                // console.log(error)
             }
         }
         load()

@@ -44,7 +44,6 @@ export default function AllCards() {
             if (!collection) {
                 throw new Error("Keine Collection")
             }
-            console.log(id);
             await updateCard(id, { front, back, notes })
             const updatedCollection = await getCardCollectionById(collection.collectionId);
             setCollection(updatedCollection);
@@ -55,7 +54,6 @@ export default function AllCards() {
                 message: "Aktualisieren fehlgeschlagen!",
                 type: "ERROR",
             })
-            console.log(error)
         }
     }
 
@@ -65,7 +63,6 @@ export default function AllCards() {
                 throw new Error("Keine Collection")
             }
             await postCard(collection.collectionId, front, back, notes);
-            console.log("handle", front)
             const updatedCollection = await getCardCollectionById(collection.collectionId);
             setCollection(updatedCollection);
             setShowModal(false)
@@ -75,7 +72,6 @@ export default function AllCards() {
                 message: "Hinzufügen fehlgeschlagen!",
                 type: "ERROR",
             })
-            console.log(error)
         }
     }
 

@@ -17,7 +17,6 @@ export default function LoginProvider({ children }: ProviderProps) {
     async function getLogin() {
         try {
             const data = await getLoginInfo();
-            console.log("getlogin", data)
             setLoginInfo(data)
         } catch (error) {
             setLoginInfo(false);
@@ -46,7 +45,6 @@ export default function LoginProvider({ children }: ProviderProps) {
         try {
             const data = await loginSignIn(email, password);
             setLoginInfo(data)
-            console.log("signIn logininfo", loginInfo)
             addToast({
                     id: uuidv4(),
                     message: 'Angemeldet!',
