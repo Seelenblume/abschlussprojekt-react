@@ -1,4 +1,3 @@
-import { testCardCollections } from "../test/testdata";
 import type { CardCollection } from "../models/card";
 import type { Category } from "../models/category";
 
